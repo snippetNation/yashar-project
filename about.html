@@ -1,0 +1,772 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <script>tailwind.config = {
+            "theme": {
+                "extend": {
+                    "colors": {
+                        "yashar-red": "#FF0000",
+                        "yashar-blue": "#0000FF",
+                        "yashar-olive": "#808000",
+                        "dark-gray": "#2D2D2D",
+                        "war-red": "#FF0000",
+                        "war-dark-red": "#A53D00",
+                        "israel-blue": "#00afef",
+                        "israel-light-blue": "#2EA3F2",
+                        "military-green": "#808000",
+                        "light-gray": "#F5F5F5"
+                    },
+                    "fontFamily": {
+                        "sans": [
+                            "Inter",
+                            "sans-serif"
+                        ]
+                    }
+                }
+            }
+        };</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <style>
+        .highlighted-section {
+            outline: 2px solid #3F20FB;
+            background-color: rgba(63, 32, 251, 0.1);
+        }
+
+        .edit-button {
+            position: absolute;
+            z-index: 1000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-50">
+    <!-- Universal Header -->
+    <site-header></site-header>
+    <!-- Our Mission and History Main -->
+    <div id="our-mission-and-history-main" class="page-content">
+        <!-- Hero Section -->
+        <section id="hero-section-our-mission-and-history"
+            class="relative h-[400px] bg-gradient-to-r from-yashar-blue to-blue-800 overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <img class="absolute inset-0 w-full h-full object-cover opacity-60"
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3a74e54dec-03898d4ea7dd737b5754.png"
+                alt="Israeli flag waving with Jerusalem skyline in background, dramatic lighting">
+            <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
+                <div class="text-white">
+                    <nav class="text-sm mb-4">
+                        <span class="opacity-80">Home</span>
+                        <i class="mx-2 text-xs opacity-60" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-right"
+                                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
+                            </svg></i>
+                        <span class="font-semibold">About Us</span>
+                    </nav>
+                    <h1 class="text-5xl font-bold heading-font mb-4">Our Mission and History</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area with Donation Sidebar -->
+        <section id="main-content-area-our-mission-and-history" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+                    <!-- Content -->
+                    <div class="container col-span-3 space-y-12">
+
+                        <!-- Our Story Section -->
+                        <article id="our-story-section"
+                            class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+                            <h2 class="text-3xl font-bold heading-font text-dark-gray mb-6">Since 2006, we have always
+                                been
+                                there for our soldiers – and we always will.</h2>
+                            <div class="prose prose-lg max-w-none">
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    From its inception during the 2006 Second Lebanon War, Yashar LaChayal has been at
+                                    the
+                                    forefront of providing humanitarian support for Israeli soldiers. During the war, a
+                                    small group of volunteers worked together to purchase, collect and package
+                                    much-needed
+                                    toiletries, clothing, and other supplies, and transported them directly to the
+                                    soldiers
+                                    on the front. On occasion, the volunteers themselves had to take shelter as rockets
+                                    and
+                                    mortars rained down all around them. They drove far north, beyond the last civilian,
+                                    to
+                                    deliver supplies to the soldiers who were mobilized hastily and were running low on
+                                    essentials. These volunteers met army units about to cross the border, and sent
+                                    additional supplies to soldiers stationed deep in Lebanon. <br><br>
+
+                                    When the war ended, the volunteers were still aware of soldiers’ needs which could
+                                    be
+                                    met by their supporters in Israel and overseas. Yashar LaChayal was duly established
+                                    as
+                                    a recognized non-profit organization in Israel and the United States, dedicated to
+                                    helping Israeli soldiers and making their service more comfortable while they are
+                                    protecting the Jewish homeland. Since then, Yashar LaChayal has created and
+                                    maintained a
+                                    range of projects which provide various forms of support to soldiers from
+                                    impoverished
+                                    families, those injured in the line of duty, and bereaved family members of those
+                                    who
+                                    fell in Israel’s defense. <br><br>
+
+                                    Yashar LaChayal is unique in many ways. First, as a result of annual support from a
+                                    donor family that funds operational costs, regular donations can be devoted in their
+                                    entirety to the soldiers’ needs. Second, since its inception, strong relationships
+                                    have
+                                    developed between the staff of Yashar LaChayal and army officials, enabling us to
+                                    properly assess the needs of our soldiers and to fulfill them. Finally, Yashar
+                                    LaChayal
+                                    (literally, “Straight to the Soldier”) means that our projects and donations benefit
+                                    the
+                                    soldiers directly and allow us to frequently remind them that we stand with them and
+                                    that they have a huge wall of international Jewish support behind them. This
+                                    sentiment
+                                    alone is worth as much to the young men and women defending Israel as the material,
+                                    humanitarian support that we provide them.
+
+                                </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+        </section>
+    </div>
+
+    <!-- Our Board of Directors Main -->
+    <div id="our-board-of-directors-main" class="hidden page-content">
+        <!-- Hero Section -->
+        <section id="hero-section-our-board-of-directors"
+            class="relative h-[400px] bg-gradient-to-r from-yashar-blue to-blue-800 overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <img class="absolute inset-0 w-full h-full object-cover opacity-60"
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3a74e54dec-03898d4ea7dd737b5754.png"
+                alt="Israeli flag waving with Jerusalem skyline in background, dramatic lighting">
+            <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
+                <div class="text-white">
+                    <nav class="text-sm mb-4">
+                        <span class="opacity-80">Home</span>
+                        <i class="mx-2 text-xs opacity-60" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-right"
+                                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
+                            </svg></i>
+                        <span class="font-semibold">About Us</span>
+                    </nav>
+                    <h1 class="text-5xl font-bold heading-font mb-4">Our Board of Directors</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section id="main-content-area-our-board-of-directors" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+                    <!-- Content -->
+                    <div class="container col-span-3 space-y-12">
+
+                        <!-- Our Board of Directors-->
+                        <div id="our-board-of-directors"
+                            class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+                            <!-- US Directors -->
+                            <h2 class="text-3xl font-bold heading-font text-blue-700 mb-6">US Directors</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                                <div id="jack-Silverman-president"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Jack Silverman, President</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Jack Silverman resides in East Brunswick, New Jersey, with his wife
+                                                Terri.
+                                                He is an active member of the East Brunswick Jewish Center, where he is
+                                                the
+                                                Gabbai, and the co-founder of the East Brunswick Jewish Center Mitzvah
+                                                Corps, which actively supports Yashar LaChayal. He is a Senior Manager
+                                                of
+                                                Klauber Brothers, Inc.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="dr-ken-bendik"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Dr. Ken Bendik</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Ken Bendick is a dentist in California, and an ardent supporter of
+                                                Israel
+                                                and the IDF.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="laurie-moskowitz-hirsch"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Laurie Moskowitz Hirsch</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Laurie Moskowitz Hirsch is a resident of Aventura, Florida, where she is
+                                                very active in communal affairs. She has volunteered for the Jewish
+                                                Community Services of South Florida and the Circle of Life Food Bank,
+                                                and is
+                                                a Board member of the Southeast Region American Friends of Bar Ilan
+                                                University.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="adam-klazmer"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Adam Klazmer</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Adam Klazmer enlisted in the Israel Defense Forces after graduating from
+                                                Babson College in 2010. Assigned to the Nachal Infantry Brigade’s 50th
+                                                Battalion, Adam served in the West Bank and on the border with Gaza. He
+                                                felt
+                                                that the biggest impact could be made through Yashar LaChayal. Adam is
+                                                currently a financial advisor with Rubin Goldman and Associates in his
+                                                hometown of Philadelphia.
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div id="matthew-h-maschler"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Matthew H. Maschler</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Matthew H. Maschler is an attorney residing in Boca Raton, Florida, with
+                                                his
+                                                wife and two children. He is a graduate of the University of Maryland
+                                                and
+                                                Touro Law School. Matthew serves as General Counsel to Castle Financial,
+                                                LLC,and is the Manager of the Maschler Family Foundation, a non-profit
+                                                organization focused on diverse domestic issues and international relief
+                                                efforts.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="sheldon-goldman"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Sheldon Goldman</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Sheldon Goldman has 30+ years of experience in complex, cross border
+                                                transactions, including mergers, acquisitions, and restructurings in the
+                                                United States, Europe and South America. Mr. Goldman provides financial
+                                                and
+                                                capital markets advisory services in connection with these transactions
+                                                and
+                                                general capital raising efforts.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="yaakov-seligman"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Yaakov Seligman</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Yaakov Seligman is a former Lone Soldier in the Israel Defense Forces
+                                                and an
+                                                ardent supporter of Israel. He graduated FAU with Honors, and finished
+                                                medical school becoming a mohel.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="rich-legum-past-president"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Rich Legum, Past President</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Rich Legum is Assistant Professor of Philosophy at the City College of
+                                                New
+                                                York. In addition to having served as an infantry officer and platoon
+                                                leader
+                                                in the United States Army, he is the father of a former Lone Soldier who
+                                                served in Paratroopers Unit 202 for three years.
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- Israeli Directors -->
+                            <h2 class="text-3xl font-bold heading-font text-blue-700 mb-6" style="padding-top: 8%;">
+                                Israeli Directors</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-12">
+                                <div id="Chaim-Baldesare"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Chaim Baldesare</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Chaim Baldesare made aliyah from New Jersey in 1983. He has six
+                                                children,
+                                                four of whom have completed their IDF service. Chaim served as a medic
+                                                in
+                                                the IDF, and went on to do reserve duty for twelve years. He currently
+                                                runs
+                                                a plumbing company in Maaleh Adumim.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Adv-Arie-Zuckerman"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Adv. Arie Zuckerman</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Arie is the President of North Atlantic Potash Inc, and Vice President
+                                                of
+                                                JSC Acron. He is also the Director General of the European Jewish Fund
+                                                and a
+                                                senior Executive in the European Jewish Congress,and a senior Advisor to
+                                                the
+                                                Chairman of Yad Vashem. He received his LL.B and LL.M from the Hebrew
+                                                University and served in the past in different positions in the Prime
+                                                Ministers office of Israel.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Abigail-Klein-Leichman"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Abigail Klein Leichman</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Abigail Klein Leichman is a writer and associate editor at
+                                                ISRAEL21c.org,
+                                                and also freelances for publications including the Jerusalem Post and
+                                                the
+                                                Jewish Standard (New Jersey). She and her husband made aliyah in 2007.
+                                                Their
+                                                three children include a son and daughter who are IDF veterans, and a
+                                                son
+                                                living in New York City.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Shlomo-Loshinsky"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Shlomo Loshinsky</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Shlomo Loshinsky made aliyah from New York in 1983. He is a graduate of
+                                                Brooklyn College, with a master’s degree in International Relations, and
+                                                is
+                                                a partner at Global Gourmet Products in Netanya.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Ruthie-Lieberman"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Ruthie Lieberman</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Ruthie Lieberman is an Israeli-based political consultant and licensed
+                                                tour
+                                                guide, combining her love of Israel with political acumen to better
+                                                Israel’s
+                                                standing both at home and in the eyes of the world. She has consulted
+                                                for
+                                                political leaders in Jerusalem and in Washington, from work on election
+                                                campaigns to public advocacy and events.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Valerie-Emergui"
+                                    class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Valerie Emergui</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Valerie Emergui made Aliyah from Montreal in 2009. She has 5 children
+                                                one of
+                                                whom has completed his army service and another presently serving in
+                                                Magav.
+                                                She is a math and English teacher and the English coordinator in a
+                                                middle
+                                                school in Maale Adumim where she resides with her family. She is
+                                                currently
+                                                enrolled in a Masters in Educational counseling at Bar Ilan University.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+    </div>
+
+    <!-- Tax Certificate Page-->
+    <div id="tax-certificate-main" class="hidden page-content">
+        <!-- Hero Section -->
+        <section id="hero-section-tax-certificate"
+            class="relative h-[400px] bg-gradient-to-r from-yashar-blue to-blue-800 overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <img class="absolute inset-0 w-full h-full object-cover opacity-60"
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3a74e54dec-03898d4ea7dd737b5754.png"
+                alt="Israeli flag waving with Jerusalem skyline in background, dramatic lighting">
+            <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
+                <div class="text-white">
+                    <nav class="text-sm mb-4">
+                        <span class="opacity-80">Home</span>
+                        <i class="mx-2 text-xs opacity-60" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-right"
+                                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
+                            </svg></i>
+                        <span class="font-semibold">About Us</span>
+                    </nav>
+                    <h1 class="text-5xl font-bold heading-font mb-4">Yashar LaChayal Tax Certifications</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section id="main-content-area-tax-certificate" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+                    <!-- Content -->
+                    <div class="container col-span-3 space-y-12">
+
+                        <!-- Our Story Section -->
+                        <article id="our-tax-certificate"
+                            class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+                            <div class="prose lg:col-span-2 prose-lg max-w-none">
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    Yashar LaChayal is a registered Non-Profit in Israel and is approved with Chapter 46
+                                    status.<br><br>
+
+                                    Friends of Yashar LaChayal, Inc. is U.S. tax-exempt with a 501 (c)3 status-
+                                    #20-8021512
+
+                                </p>
+
+                                <div class="mt-8">
+                                    <p class="mt-4">
+                                        <a href="pdf/Determination-Letter1.pdf"
+                                            target="_blank">
+                                        <span
+                                            class="text-black underline font-semibold hover:text-gray-600 transition duration-300">View</span>
+                                        - Friends of Yashar LaChayal Inc.’s 501c3 Status
+                                        </a>
+                                    </p>
+
+                                    <p class="mt-4">
+                                        <a href="pdf/ניהול-תקין2025.pdf"
+                                            target="_blank">
+                                            <span
+                                                class="text-black underline font-semibold hover:text-gray-600 transition duration-300">View</span>
+                                            - Yashar LaChayal’s Non-Profit Registration in Israel
+                                        </a>
+                                    </p>
+
+                                    <p class="mt-4">
+                                        <a href="pdf/אישור-מלכר-ממשרדי-מעמ.pdf"
+                                            target="_blank">
+                                            <span
+                                                class="text-black underline font-semibold hover:text-gray-600 transition duration-300">View</span>
+                                            - Yashar LaChayal’s Chapter 46 Status for Israel
+                                        </a>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <a href="https://www.guidestar.org/profile/20-8021512" target="_blank"><img
+                                    class="mx-auto mt-8" src="https://widgets.guidestar.org/gximage2?o=9146279&l=v4"
+                                    alt="Yashar LaChayal Tax Certificates"></a>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <site-footer></site-footer>
+        
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <script>tailwind.config = {
+            "theme": {
+                "extend": {
+                    "colors": {
+                        "yashar-red": "#FF0000",
+                        "yashar-blue": "#0000FF",
+                        "yashar-olive": "#808000",
+                        "dark-gray": "#2D2D2D",
+                        "war-red": "#FF0000",
+                        "war-dark-red": "#A53D00",
+                        "israel-blue": "#00afef",
+                        "israel-light-blue": "#2EA3F2",
+                        "military-green": "#808000",
+                        "light-gray": "#F5F5F5"
+                    },
+                    "fontFamily": {
+                        "sans": [
+                            "Inter",
+                            "sans-serif"
+                        ]
+                    }
+                }
+            }
+        };</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <style>
+        .highlighted-section {
+            outline: 2px solid #3F20FB;
+            background-color: rgba(63, 32, 251, 0.1);
+        }
+
+        .edit-button {
+            position: absolute;
+            z-index: 1000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Universal Header -->
+    <site-header></site-header>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="relative h-[400px] bg-gradient-to-r from-yashar-blue to-blue-800 overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <img class="absolute inset-0 w-full h-full object-cover opacity-60"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3a74e54dec-03898d4ea7dd737b5754.png"
+            alt="Israeli flag waving with Jerusalem skyline in background, dramatic lighting">
+        <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
+            <div class="text-white">
+                <nav class="text-sm mb-4">
+                    <span class="opacity-80">Home</span>
+                    <i class="mx-2 text-xs opacity-60" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-right"
+                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                            </path>
+                        </svg></i>
+                    <span class="font-semibold">About Us</span>
+                </nav>
+                <h1 class="text-5xl font-bold heading-font mb-4">Our Mission</h1>
+                <p class="text-xl opacity-90 max-w-2xl">Standing with Israel in times of crisis, providing essential
+                    humanitarian aid and defense support to those who need it most.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area with Donation Sidebar -->
+    <section id="main-content-area" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+                <!-- Content Column -->
+                <div class="lg:col-span-2">
+
+                    <!-- Our Story Section -->
+                    <article id="our-story" class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+                        <h2 class="text-3xl font-bold heading-font text-dark-gray mb-6">Our Story</h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                YasharProject was born from the urgent recognition that in times of crisis, immediate
+                                action saves lives. Founded by a coalition of concerned individuals from around the
+                                world, our organization emerged as a direct response to the escalating humanitarian
+                                needs in Israel during periods of intense conflict.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                The name "Yashar" means "straight" or "direct" in Hebrew, reflecting our commitment to
+                                transparent, immediate aid delivery without bureaucratic delays. Every dollar donated
+                                goes directly to verified humanitarian and defense initiatives, with full accountability
+                                and regular reporting to our supporters.
+                            </p>
+                            <div class="bg-yashar-blue bg-opacity-10 p-6 rounded-lg mb-6 border-l-4 border-yashar-blue">
+                                <p class="text-gray-800 font-medium italic">
+                                    "In moments of crisis, the difference between hope and despair often comes down to
+                                    knowing that someone, somewhere, cares enough to act. YasharProject is that bridge
+                                    between caring and action."
+                                </p>
+                                <cite class="text-sm text-gray-600 mt-2 block">- Sarah Cohen, Founding Director</cite>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Since our inception, we have channeled over $2.3 million in emergency aid, supporting
+                                everything from bulletproof vests for first responders to emergency medical supplies for
+                                hospitals treating civilian casualties. Our network spans across continents, with
+                                supporters from North America, Europe, Australia, and beyond.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                <!-- Image -->
+                                <img 
+                                    src="https://yasharlachayal.org/wp-content/uploads/2023/03/WhatsApp-Image-2021-11-28-at-16.25.08-1.jpeg" 
+                                    alt="Soldiers in Need Supply Closets" 
+                                    class="w-full h-48 object-cover"
+                                />
+
+                                <!-- Toggle Section -->
+                                <div class="p-4">
+                                    <button 
+                                    class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+                                    >
+                                    <span>Soldiers in Need Supply Closets</span>
+                                    <!-- Plus Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                        class="h-6 w-6 text-gray-600 transition-transform duration-300" 
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                        d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    </button>
+
+                                    <!-- Hidden Content -->
+                                    <div class="hidden mt-3 text-gray-600">
+                                    <p>
+                                        Yashar LaChayal stocks special supply closets on training bases 
+                                        throughout Israel. These supply closets provide soldiers in need 
+                                        with important necessities such as warm socks, toothbrushes, 
+                                        and deodorant.
+                                    </p>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                <!-- Image -->
+                                <img 
+                                    src="https://yasharlachayal.org/wp-content/uploads/2023/03/WhatsApp-Image-2021-11-28-at-16.25.08-1.jpeg" 
+                                    alt="Soldiers in Need Supply Closets" 
+                                    class="w-full h-48 object-cover"
+                                />
+
+                                <!-- Toggle Section -->
+                                <div class="p-4">
+                                    <button 
+                                    class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+                                    >
+                                    <span>Soldiers in Need Supply Closets</span>
+                                    <!-- Plus Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                        class="h-6 w-6 text-gray-600 transition-transform duration-300" 
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                        d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    </button>
+
+                                    <!-- Hidden Content -->
+                                    <div class="hidden mt-3 text-gray-600">
+                                    <p>
+                                        Yashar LaChayal stocks special supply closets on training bases 
+                                        throughout Israel. These supply closets provide soldiers in need 
+                                        with important necessities such as warm socks, toothbrushes, 
+                                        and deodorant.
+                                    </p>
+                                    </div>
+                                </div>
+                                </div>
+
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                <!-- Image -->
+                                <img 
+                                    src="https://yasharlachayal.org/wp-content/uploads/2023/03/WhatsApp-Image-2021-11-28-at-16.25.08-1.jpeg" 
+                                    alt="Soldiers in Need Supply Closets" 
+                                    class="w-full h-48 object-cover"
+                                />
+
+                                <!-- Toggle Section -->
+                                <div class="p-4">
+                                    <button 
+                                    class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                    onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')"
+                                    >
+                                    <span>Soldiers in Need Supply Closets</span>
+                                    <!-- Plus Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                        class="h-6 w-6 text-gray-600 transition-transform duration-300" 
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                        d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    </button>
+
+                                    <!-- Hidden Content -->
+                                    <div class="hidden mt-3 text-gray-600">
+                                    <p>
+                                        Yashar LaChayal stocks special supply closets on training bases 
+                                        throughout Israel. These supply closets provide soldiers in need 
+                                        with important necessities such as warm socks, toothbrushes, 
+                                        and deodorant.
+                                    </p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Donation Sidebar -->
+                <site-donation-form></site-donation-form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <site-footer></site-footer>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

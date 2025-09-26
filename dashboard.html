@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YasharProject Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
         referrerpolicy="no-referrer"></script>
@@ -40,6 +41,7 @@
             }
         }
     </style>
+
     <script>tailwind.config = {
             "theme": {
                 "extend": {
@@ -59,8 +61,7 @@
         };</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <!-- TinyMCE CDN -->
-    <script src="https://cdn.tiny.cloud/1/qw8o6ze70qvnuwyl4pzvjzo2fhxy7kp7t8wfghrfjb957deh/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
     <style>
@@ -1776,7 +1777,8 @@
                             <p class="text-gray-600">Create and manage news articles and updates</p>
                         </div>
                         <button onclick="showNewsForm()"
-                            class="bg-yashar-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
+                            class="bg-yashar-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
+                            id="add-news-button">
                             <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true"
                                     focusable="false" data-prefix="fas" data-icon="plus" role="img"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
@@ -1951,98 +1953,84 @@
                 <!-- News Form Modal -->
                 <div id="news-form-modal"
                     class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center p-4">
-                    <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-screen overflow-y-auto">
-                        <div class="p-6 border-b border-gray-200">
-                            <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-bold text-gray-900">Add News Article</h2>
-                                <button onclick="hideNewsForm()" class="text-gray-400 hover:text-gray-600">
-                                    <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-xmark"
-                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
-                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
-                                            data-fa-i2svg="">
-                                            <path fill="currentColor"
-                                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                                            </path>
-                                        </svg></i>
-                                </button>
+                    <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl max-h-[95vh] flex flex-col">
+                        
+                        <!-- Header -->
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-900">Add News Article</h2>
+                        <button onclick="hideNewsForm()" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                        </div>
+
+                        <!-- Form -->
+                        <form id="newsForm" class="p-6 flex-1 overflow-y-auto flex flex-col gap-6">
+                        
+                        <!-- Title -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Article Title</label>
+                            <input type="text" id="articleTitle"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue"
+                            placeholder="Enter article title">
+                        </div>
+
+                        <!-- Author & Date -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Author</label>
+                            <input type="text" value="Admin User" readonly
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue">
+                            </div>
+                            <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
+                            <input type="datetime-local"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue">
                             </div>
                         </div>
 
-                        <form class="p-6 space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Article Title</label>
-                                <input type="text"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue"
-                                    placeholder="Enter article title">
+                        <!-- Featured Image -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Featured Image</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                            <svg class="w-10 h-10 text-gray-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 5a2 2 0 012-2h14a2..."/>
+                            </svg>
+                            <p class="text-gray-600">Click to upload or drag and drop</p>
+                            <p class="text-sm text-gray-500">PNG, JPG up to 10MB</p>
                             </div>
+                        </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Author</label>
-                                    <input type="text"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue"
-                                        value="Admin User" readonly="">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
-                                    <input type="datetime-local"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yashar-blue">
-                                </div>
-                            </div>
+                        <!-- Toast UI Editor -->
+                        <div class="flex-1 flex flex-col">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Article Content</label>
+                            <div id="editorContainer" class="flex-1 min-h-[500px] border rounded overflow-hidden"></div>
+                        </div>
 
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Featured Image</label>
-                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                                    <i class="text-3xl text-gray-400 mb-2" data-fa-i2svg=""><svg
-                                            class="svg-inline--fa fa-image" aria-hidden="true" focusable="false"
-                                            data-prefix="fas" data-icon="image" role="img"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                            <path fill="currentColor"
-                                                d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z">
-                                            </path>
-                                        </svg></i>
-                                    <p class="text-gray-600">Click to upload or drag and drop</p>
-                                    <p class="text-sm text-gray-500">PNG, JPG up to 10MB</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Article Content</label>
-                                <div class="border border-gray-300 rounded-lg">
-                                    <textarea
-                                        id="article-content"></textarea>
-                                </div>
-                            </div>
-                            <div class="flex justify-end space-x-4">
-                                <button type="submit"
-                                    class="bg-yashar-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
-                                    <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-eye" aria-hidden="true"
-                                            focusable="false" data-prefix="fas" data-icon="eye" role="img"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
-                                            <path fill="currentColor"
-                                                d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.46a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.46a32.35 32.35 0 0 0 0-29.14zM288 400c-97.05 0-184.22-55.22-232-144c47.74-88.73 134.91-144 232-144s184.26 55.22 232 144c-47.74 88.73-134.91 144-232 144zm0-272a112 112 0 1 0 112 112a112.14 112.14 0 0 0 -112-112zm0 176a64 64 0 1 1 64-64a64.07 64.07 0 0 1 -64 64z">
-                                            </path>
-                                        </svg></i>Save & Preview Article
-                                </button>
-                                <button type="button"
-                                    class="bg-yashar-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
-                                    onclick="hideNewsForm()">
-                                    <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-times" aria-hidden="true"
-                                            focusable="false" data-prefix="fas" data-icon="times" role="img"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg="">
-                                            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.19 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.19 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
-                                            </path>
-                                        </svg></i>Cancel
-                                </button>
-
+                        <!-- Buttons -->
+                        <div class="flex justify-end gap-4">
+                            <button type="submit"
+                            class="bg-yashar-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
+                            Save & Preview Article
+                            </button>
+                            <button type="button" onclick="hideNewsForm()"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg font-medium">
+                            Cancel
+                            </button>
+                        </div>
                         </form>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 
 <script>
+
   function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
 
@@ -2169,34 +2157,50 @@ function hidePageEditor() {
   editor.classList.add("hidden");
 }
 
+let newsEditor = null;
+
 function showNewsForm() {
   const form = document.getElementById("news-form-modal");
   form.classList.remove("hidden");
-}
 
+    if (!newsEditor) {
+    newsEditor = new toastui.Editor({
+    el: document.querySelector('#editorContainer'),
+    height: '100%',
+    minHieght: '300px',
+    initialEditType: '', // or 'markdown'
+    previewStyle: window.innerWidth < 768 ? 'tab' : 'vertical',
+    usageStatistics: false,
+    hooks: {
+    // image upload hook (example) - upload to server; here we insert base64 as fallback
+    addImageBlobHook: (blob, callback) => {
+        // Example: upload to your server with fetch and return URL to callback(url)
+        // For demo, we'll convert to base64 and insert (not recommended for production)
+        const reader = new FileReader();
+        reader.onload = () => {
+        callback(reader.result, 'uploaded-image');
+        };
+        reader.readAsDataURL(blob);
+        return false; // handled async
+        }
+    }
+    });
+}
+}
 function hideNewsForm() {
   const form = document.getElementById("news-form-modal");
   form.classList.add("hidden");
 }
 
-  tinymce.init({
-    selector: '#article-content',
-    plugins: [
-      // Core editing features
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-      // Your account includes a free trial of TinyMCE premium features
-      // Try the most popular premium features until Sep 30, 2025:
-      'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-    ],
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-    uploadcare_public_key: 'a557921257109a3cb32d',
+  document.getElementById("newsForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const payload = {
+      title: document.getElementById("articleTitle").value,
+      html: newsEditor.getHTML(),
+      markdown: newsEditor.getMarkdown()
+    };
+    console.log("News Article Payload:", payload);
+    hideNewsForm();
   });
 
 

@@ -1,0 +1,223 @@
+<!-- Emergency Alert Strip -->
+ <style>
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+</style>
+
+<div id="emergency-alert" class="sticky inset-0 z-999 text-white py-2 "
+    style="background: linear-gradient(-135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%); z-index: 1000;">
+    <div class="whitespace-nowrap animate-pulse overflow-hidden">
+        <div class="animate-marquee inline-block">
+           <span> 🚨 URGENT: Israel is at war - Our soldiers need your support NOW
+            &nbsp;&nbsp; | &nbsp;&nbsp; 24,000+ soldiers supported | 10,000+ care packages delivered since October 2023
+            &nbsp;&nbsp; | &nbsp;&nbsp; Every donation saves lives on the frontlines
+            &nbsp;&nbsp; | &nbsp;&nbsp; Join thousands supporting our heroes
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header id="header" class="shadow-lg sticky top-0 z-50 border-b"
+    style="background: linear-gradient(135deg, rgb(2, 3, 129) 13%, rgb(40, 116, 252) 80%); opacity: 0.9;">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between py-4">
+            <div class="flex items-center space-x-3" onclick="window.location.href='index.html'">
+                <div class="flex items-center">
+                    <i class="text-israel-blue text-2xl md:text-2sm mr-2" data-fa-i2svg=""><svg
+                            class="svg-inline--fa fa-shield-halved" aria-hidden="true" focusable="false"
+                            data-prefix="fas" data-icon="shield-halved" role="img" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z">
+                            </path>
+                        </svg></i>
+                    <h1 class="font-oswald  font-bold text-white">YasharProject</h1>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <ul class="flex items-center space-x-8">
+                    <!-- Home -->
+                    <li>
+                        <a href="index.html"
+                            class="text-white hover:text-israel-blue font-medium transition-colors">Home</a>
+                    </li>
+
+                    <!-- About Dropdown -->
+                    <li class="relative group">
+                        <button
+                            class="text-white hover:text-israel-blue font-medium transition-colors flex items-center"
+                            data-target="our-mission-and-history-main">
+                            About Us
+                            <svg class="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 320 512">
+                                <path d="M143 352l137-136c9.4-9.4 24.6-9.4 33.9 0l22.6 
+                                22.6c9.4 9.4 9.4 24.6 0 
+                                34L160 448 9.4 272c-9.4-9.4-9.4-24.6 
+                                0-34L32 215.4c9.4-9.4 24.6-9.4 
+                                33.9 0L143 352z" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <ul class="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
+                            <li><a href="about.html#our-mission-and-history-main"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="about.html" data-target="our-mission-and-history-main">Mission and
+                                    History</a></li>
+                            <li><a href="about.html#our-board-of-directors-main"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="about.html" data-target="our-board-of-directors-main">Board</a></li>
+                            <li><a href="about.html#tax-certificate-main"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="about.html" data-target="tax-certificate-main">Tax
+                                    Certifications</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Emergency Response -->
+                    <li>
+                        <a href="#" class="text-white hover:text-israel-blue font-medium transition-colors">Emergency
+                            Response</a>
+                    </li>
+
+                    <!-- Projects Dropdown -->
+                    <li class="relative group">
+                        <button
+                            class="text-white hover:text-israel-blue font-medium transition-colors flex items-center"
+                            onclick="window.location.href='project.html#main-project'">
+                            Projects
+                            <svg class="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 320 512">
+                                <path d="M143 352l137-136c9.4-9.4 24.6-9.4 33.9 0l22.6 
+                                22.6c9.4 9.4 9.4 24.6 0 
+                                34L160 448 9.4 272c-9.4-9.4-9.4-24.6 
+                                0-34L32 215.4c9.4-9.4 24.6-9.4 
+                                33.9 0L143 352z" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <ul class="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
+                            <li><a href="project.html#warm-corner-project"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="project.html" data-target="warm-corner-project">Warm Corners</a>
+                            </li>
+                            <li><a href="project.html#Soldiers-in-need-fund-project"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="project.html" data-target="Soldiers-in-need-fund-project">Soldiers in
+                                    Need</a>
+                            </li>
+                            <li><a href="project.html#Injured-Soldier-Fund"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="project.html" data-target="Injured-Soldier-Fund">Injured Soldier
+                                    Fund</a></li>
+                            <li><a href="project.html#Families-Support"
+                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    data-file="project.html" data-target="Families-Support">Families Support</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- News -->
+                    <li>
+                        <a href="news.html"
+                            class="text-white hover:text-israel-blue font-medium transition-colors">News</a>
+                    </li>
+
+                    <!-- Contact -->
+                    <li>
+                        <a href="contact.html"
+                            class="text-white hover:text-israel-blue font-medium transition-colors">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button class="bg-white text-war-dark-red px-2 py-3 rounded font-bold transition-colors font-oswald"
+                    onclick="window.location.href='donate.html'">
+                    DONATE NOW
+                </button>
+                <button class="md:hidden burger text-white p-3 rounded-lg hover:bg-israel-blue transition-colors">
+                    <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-bars" aria-hidden="true"
+                            focusable="false" data-prefix="fas" data-icon="bars" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
+                            </path>
+                        </svg></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden text-white shadow-lg">
+            <ul class="flex flex-col space-y-2 p-4">
+                <li><a href="index.html" class=" hover:text-israel-blue">Home</a></li>
+
+                <!-- About Dropdown -->
+                <li>
+                    <button data-dropdown="about-dropdown"
+                        class="flex justify-between items-center w-full hover:text-israel-blue">
+                        About Us
+                        <span>▼</span>
+                    </button>
+                    <ul id="about-dropdown" class="hidden pl-4 mt-2 space-y-2">
+                        <li><a href="about.html#our-mission-and-history-main"
+                                class="na-link block hover:text-israel-blue" data-file="about.html"
+                                data-target="our-mission-and-history-main">Mission and History</a></li>
+                        <li><a href="about.html#our-board-of-directors-main"
+                                class="na-link block hover:text-israel-blue" data-file="about.html"
+                                data-target="our-board-of-directors-main">Board</a></li>
+                        <li><a href="about.html#tax-certificate-main" class="na-link block hover:text-israel-blue"
+                                data-file="about.html" data-target="tax-certificate-main">Tax Certifications</a></li>
+                    </ul>
+                </li>
+
+                <!-- Emergency Response -->
+                <li><a href="#" class="hover:text-israel-blue">Emergency Response</a></li>
+
+                <!-- Projects Dropdown -->
+                <li>
+                    <button data-dropdown="projects-dropdown"
+                        class="flex justify-between items-center w-full hover:text-israel-blue">
+                        Projects
+                        <span>▼</span>
+                    </button>
+                    <ul id="projects-dropdown" class="hidden pl-4 mt-2 space-y-2">
+                        <li><a href="project.html#warm-corner-project" class="na-link block hover:text-israel-blue"
+                                data-file="project.html" data-target="warm-corner-project">Warm Corners</a></li>
+                        <li><a href="project.html#Soldiers-in-need-fund-project"
+                                class="na-link block hover:text-israel-blue" data-file="project.html"
+                                data-target="Soldiers-in-need-fund-project">Soldiers in Need</a></li>
+                        <li><a href="project.html#Injured-Soldier-Fund" class="na-link block hover:text-israel-blue"
+                                data-file="project.html" data-target="Injured-Soldier-Fund">Injured Soldier Fund</a>
+                        </li>
+                        <li><a href="project.html#Families-Support" class="na-link block hover:text-israel-blue"
+                                data-file="project.html" data-target="Families-Support">Families Support</a></li>
+                    </ul>
+                </li>
+
+                <!-- News -->
+                <li><a href="news.html" class="hover:text-israel-blue">News</a></li>
+
+                <!-- Contact -->
+                <li><a href="#" class="hover:text-israel-blue">Contact</a></li>
+
+                <!-- Donate -->
+                <li>
+                    <a href="donate.html"
+                        class="block bg-war-dark-red text-white text-center py-2 rounded font-bold">Donate
+                        Now</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

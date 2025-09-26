@@ -1,0 +1,831 @@
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <script>tailwind.config = {
+            "theme": {
+                "extend": {
+                    "colors": {
+                        "yashar-red": "#FF0000",
+                        "yashar-blue": "#0000FF",
+                        "yashar-olive": "#808000",
+                        "dark-gray": "#2D2D2D",
+                        "war-red": "#FF0000",
+                        "war-dark-red": "#A53D00",
+                        "israel-blue": "#00afef",
+                        "israel-light-blue": "#2EA3F2",
+                        "military-green": "#808000",
+                        "light-gray": "#F5F5F5"
+                    },
+                    "fontFamily": {
+                        "sans": [
+                            "Inter",
+                            "sans-serif"
+                        ]
+                    }
+                }
+            }
+        };</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <style>
+        .highlighted-section {
+            outline: 2px solid #3F20FB;
+            background-color: rgba(63, 32, 251, 0.1);
+        }
+
+        .edit-button {
+            position: absolute;
+            z-index: 1000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Universal Header -->
+    <site-header></site-header>
+
+    <!-- Main Content Area with project and Donation Sidebar -->
+    <section id="main-content-area" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+
+                <!-- Project Column -->
+                <div class="lg:col-span-2">
+
+                    <!-- Main project Section -->
+                    <article id="main-project"
+                        class="bg-white hidden rounded-xl shadow-sm border border-gray-200 p-8 mb-8 page-content"
+                        >
+                        <h2 class="text-3xl font-bold heading-font text-dark-gray mb-6">IDF Soldier Support Projects
+                        </h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Yashar LaChayal has a diverse portfolio of projects that provide support for IDF
+                                soldiers where they need it most. Please visit any of our project pages below to learn
+                                more about the project.
+                            </p>
+                            <!-- Project Images-->
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org//wp-content/uploads/2018/10/IMG_20170227_125036670-e1538653810777.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="showPage('warm-corner-project')">
+                                            <span>The Warm Corner Project</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/05/20230301_100810-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Anatot</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Anatot is sponsored monthly by Shivat Zion Israeli
+                                                Charity Trust.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/05/IMG_20180104_125429-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Ateret</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Ateret was our first Warm Corner, built in 2015, with
+                                                the generous support of our friends at Congregation Bnai Yeshurun of
+                                                Teaneck, New Jersey. The community of Ateret is located in the hills of
+                                                Samaria, 25 miles north of Jerusalem. On a clear day, the views from
+                                                Ateret are stunning.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2022/02/WhatsApp-Image-2022-02-03-at-09.30.12.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Avivim</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Avivim is located at the Lebanon border.
+
+                                                Building Sponsor: The Shmulewitz Family
+                                                Monthly Sponsor: Shivat Zion Israeli Charity Trust
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-29-at-14.53.44-2-1.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Avnei Chefetz</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Avnei Chefetz was built in June 2023, with the
+                                                generous support of a donor from Connecticut. The community of Avnei
+                                                Chefetz is located in the Shomron Region and was founded in 1990 by a
+                                                group of Yeshiva students. It has now grown to be a large observant and
+                                                open-minded community. The Warm Corner is just inside the entrance to
+                                                Avnei Chefetz.
+
+                                                Building Sponsor: Private donor from Connecticut
+                                                Monthly Sponsor: Shivat Zion Israeli Charity Trust
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2025/07/2025-05-18-beit-shemesh.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Beit Shemesh</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Beit Shemesh is a pop-up Warm Corner that provides
+                                                refreshments to IDF soldiers on their way to Beit Shemesh Train Station.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2024/11/20241015_140205-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Beit El</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Beit El was built in October 2024, with the generous
+                                                support of the Helping Israel Fund. The community of Beit El is located
+                                                in the Binyamin Region.
+
+                                                Building Sponsor: Helping Israel Fund
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Warm Corner project Section -->
+                    <article id="warm-corner-project"
+                        class="bg-white hidden rounded-xl shadow-sm border border-gray-200 p-8 mb-8 page-content"
+                        >
+                        <h2 class="text-3xl font-bold heading-font text-dark-gray mb-6">The Warm Corner Project</h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Yashar LaChayal has opened 48 Warm Corners in different communities throughout
+                                Israel!<br><br>
+
+                                Warm Corners are shelters for soldiers, set aside at the entrance to communities in
+                                dangerous regions. Each Warm Corner (known as a Pina Chama in Hebrew) has a kitchen
+                                stocked by our amazing volunteers, with food and drinks for the benefit of combat
+                                soldiers on patrol in the area. In addition, there are charging stations for phones that
+                                may not have been charged in a while due to long periods away from base, a table and
+                                chairs, and last but not least, couches for the soldiers to rest and relax on.<br><br>
+
+                                The Warm Corners have been an amazing success, one which Yashar LaChayal is very proud
+                                of, and we plan on building more!
+                            </p>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Why a Warm Corner?<br><br>
+
+                                <li>
+                                    To show support for the brave men and women defending Jewish communities in
+                                    far-flung areas.
+                                </li>
+                                <li>
+                                    A community with a Warm Corner in place will draw soldiers to the area, giving
+                                    residents a greater feeling of security.
+                                </li>
+                                <li>
+                                    Additionally, soldiers provided with the food and beverages (especially coffee!)
+                                    that a Warm Corner has to offer them (all free of charge, of course) will return to
+                                    their patrol routes rested and refreshed. Whether it is soup and a hot drink in the
+                                    cold winter, or soda and ice cream in the summer, soldiers in the area know that
+                                    they can always stop by for a well-deserved break!
+                                </li>
+                                <br><br>
+                            </p>
+                            <!-- Project Images-->
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2024/01/IMG-20231002-WA0019.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Adam</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Adam was built in 2023, with the generous support of
+                                                The Helping Israel Fund. The Helping Israel Fund also supports 6 other
+                                                Warm Corners throughout Israel. The community of Adam was founded in
+                                                1984 and has grown to contain a large and diverse community. The Warm
+                                                Corner is just inside the entrance to Adam, near a major bus station for
+                                                the region.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/05/20230301_100810-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Anatot</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Anatot is sponsored monthly by Shivat Zion Israeli
+                                                Charity Trust.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/05/IMG_20180104_125429-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Ateret</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Ateret was our first Warm Corner, built in 2015, with
+                                                the generous support of our friends at Congregation Bnai Yeshurun of
+                                                Teaneck, New Jersey. The community of Ateret is located in the hills of
+                                                Samaria, 25 miles north of Jerusalem. On a clear day, the views from
+                                                Ateret are stunning.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2022/02/WhatsApp-Image-2022-02-03-at-09.30.12.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Avivim</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Avivim is located at the Lebanon border.
+
+                                                Building Sponsor: The Shmulewitz Family
+                                                Monthly Sponsor: Shivat Zion Israeli Charity Trust
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-29-at-14.53.44-2-1.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Avnei Chefetz</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Avnei Chefetz was built in June 2023, with the
+                                                generous support of a donor from Connecticut. The community of Avnei
+                                                Chefetz is located in the Shomron Region and was founded in 1990 by a
+                                                group of Yeshiva students. It has now grown to be a large observant and
+                                                open-minded community. The Warm Corner is just inside the entrance to
+                                                Avnei Chefetz.
+
+                                                Building Sponsor: Private donor from Connecticut
+                                                Monthly Sponsor: Shivat Zion Israeli Charity Trust
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2025/07/2025-05-18-beit-shemesh.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Beit Shemesh</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Beit Shemesh is a pop-up Warm Corner that provides
+                                                refreshments to IDF soldiers on their way to Beit Shemesh Train Station.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2024/11/20241015_140205-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Beit El</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Our Warm Corner in Beit El was built in October 2024, with the generous
+                                                support of the Helping Israel Fund. The community of Beit El is located
+                                                in the Binyamin Region.
+
+                                                Building Sponsor: Helping Israel Fund
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- The Soldiers in Need Fund project Section-->
+                    <article id="Soldiers-in-need-fund-project"
+                        class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8 page-content">
+                        <h2 class="text-3xl font-bold heading-font text-dark-gray mb-6">The Soldiers in Need Fund</h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Nearly 20% of soldiers in the IDF come from financially distressed homes. Army service
+                                is fraught with harsh living conditions and hard work for all, but the needy soldier
+                                suffers from additional hardship. Although all soldiers are issued basic supplies,
+                                including army-issue linens, towels and clothing, these goods are often inadequate and
+                                not provided in sufficient quantity. It is assumed that soldiers’ families will provide
+                                their serving soldier with many of their personal items, including blankets, additional
+                                towels, undergarments and toiletries.<br><br>
+
+                                For needy soldiers, there are no “extras” they can take from home, nor are there funds
+                                to purchase additional goods. That is when the needy soldier turns to Yashar LaChayal
+                                for support and assistance. And we are there for them – with the Soldiers in Need Supply
+                                Closet, filled with toiletries such as shampoo, deodorant, soap, wet wipes, etc, and
+                                seasonal necessities like sunscreen or warm socks, extra towels and the like. We also
+                                supply hair cutting equipment to units to help alleviate the cost of regular
+                                haircuts.<br><br>
+
+                                In some cases, the families of these soldiers lack basic household goods, like
+                                refrigerators and washing machines. Soldiers may return home on furlough and not have a
+                                bed to sleep in. In situations like these, army commanders call on Yashar LaChayal to
+                                provide these necessities.<br><br>
+
+                                Every soldier should be able to serve his or her country in comfort and dignity.
+                                Designate your gift for The Soldiers in Need Fund.
+                            </p>
+                            <!-- Project Images-->
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/03/WhatsApp-Image-2021-11-28-at-16.25.08-1.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Soldiers in Need Supply Closets</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Yashar LaChayal stocks special supply closets on training bases
+                                                throughout Israel. These supply closets provide soldiers in need with
+                                                important necessities such as warm socks, toothbrushes, and deodorant.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2020/07/WhatsApp-Image-2020-05-14-at-1.19.05-PM.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Appliances for Soldiers in Need</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Yashar LaChayal provides humanitarian assistance to the impoverished
+                                                families of soldiers. When an essential household appliance breaks,
+                                                Yashar LaChayal is there to cover the cost to repair or replace it.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2020/10/WhatsApp-Image-2020-09-14-at-9.31.41-AM-2.jpeg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>The Ari and Sari Horowitz z"l Holiday Food Package Campaign</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Holidays should be a time for joy, but financial burdens can make it
+                                                difficult to enjoy them. The Ari and Sari Horowitz z”l Holiday Food
+                                                Package Campaign help relieve some of the burden on Passover and Rosh
+                                                Hashana by providing them with the ingredients to have a festive holiday
+                                                meal.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2020/10/closer.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Vouchers for Soldiers in Need</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Yashar LaChayal helps relieve financial burdens from soldiers and their
+                                                families by providing vouchers that can be exchanged for groceries.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org//wp-content/uploads/2018/12/Special-in-Uniform-e1544082070688.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Soldiers with Special Needs</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                The Israel Defense Forces is unique among armed forces for providing a
+                                                framework for citizens with special needs to voluntarily serve their
+                                                country according to their capabilities. We do what we can to support
+                                                these amazing young men and women who strive to contribute to Israel’s
+                                                defense, and who serve as an inspiration to the entire army.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                                    <!-- Image -->
+                                    <img src="https://yasharlachayal.org/wp-content/uploads/2023/03/20220314_115206-scaled.jpg"
+                                        alt="Soldiers in Need Supply Closets" class="w-full h-48 object-cover" />
+
+                                    <!-- Toggle Section -->
+                                    <div class="p-4">
+                                        <button
+                                            class="w-full flex justify-between items-center text-left font-semibold text-lg text-gray-800 focus:outline-none"
+                                            onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-45')">
+                                            <span>Purim "Mishloach Manot" Packages</span>
+                                            <!-- Plus Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 text-gray-600 transition-transform duration-300"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Hidden Content -->
+                                        <div class="hidden mt-3 text-gray-600">
+                                            <p>
+                                                Holidays should be a time for joy, but financial burdens can make it
+                                                difficult to enjoy them. The Purim “Mishloach Manot” Campaign help
+                                                relieve some of the burden on Purim by providing them with festive snack
+                                                packages to brighten up their holiday!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Donation Sidebar -->
+                <site-donation-form></site-donation-form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <site-footer></site-footer>
+    <script type="module" src="main.js"></script>
+
+</body>
+
+</html>

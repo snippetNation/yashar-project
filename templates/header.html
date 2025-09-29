@@ -1,24 +1,31 @@
 <!-- Emergency Alert Strip -->
- <style>
-@keyframes marquee {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-.animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 15s linear infinite;
-}
+<style>
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .animate-marquee {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 15s linear infinite;
+    }
 </style>
 
 <div id="emergency-alert" class="sticky inset-0 z-999 text-white py-2 "
     style="background: linear-gradient(-135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%); z-index: 1000;">
     <div class="whitespace-nowrap animate-pulse overflow-hidden">
         <div class="animate-marquee inline-block">
-           <span> 🚨 URGENT: Israel is at war - Our soldiers need your support NOW
-            &nbsp;&nbsp; | &nbsp;&nbsp; 24,000+ soldiers supported | 10,000+ care packages delivered since October 2023
-            &nbsp;&nbsp; | &nbsp;&nbsp; Every donation saves lives on the frontlines
-            &nbsp;&nbsp; | &nbsp;&nbsp; Join thousands supporting our heroes
+            <span> 🚨 URGENT: Israel is at war - Our soldiers need your support NOW
+                &nbsp;&nbsp; | &nbsp;&nbsp; 24,000+ soldiers supported | 10,000+ care packages delivered since October
+                2023
+                &nbsp;&nbsp; | &nbsp;&nbsp; Every donation saves lives on the frontlines
+                &nbsp;&nbsp; | &nbsp;&nbsp; Join thousands supporting our heroes
             </span>
         </div>
     </div>
@@ -91,37 +98,22 @@
                     <!-- Projects Dropdown -->
                     <li class="relative group">
                         <button
-                            class="text-white hover:text-israel-blue font-medium transition-colors flex items-center"
-                            onclick="window.location.href='project.html#main-project'">
+                            class="text-white hover:text-israel-blue font-medium transition-colors flex items-center" onclick="window.location.href='project.html'">
                             Projects
                             <svg class="w-3 h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 320 512">
                                 <path d="M143 352l137-136c9.4-9.4 24.6-9.4 33.9 0l22.6 
-                                22.6c9.4 9.4 9.4 24.6 0 
-                                34L160 448 9.4 272c-9.4-9.4-9.4-24.6 
-                                0-34L32 215.4c9.4-9.4 24.6-9.4 
-                                33.9 0L143 352z" />
+            22.6c9.4 9.4 9.4 24.6 0 
+            34L160 448 9.4 272c-9.4-9.4-9.4-24.6 
+            0-34L32 215.4c9.4-9.4 24.6-9.4 
+            33.9 0L143 352z" />
                             </svg>
                         </button>
-                        <!-- Dropdown menu -->
-                        <ul class="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
-                            <li><a href="project.html#warm-corner-project"
-                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                    data-file="project.html" data-target="warm-corner-project">Warm Corners</a>
-                            </li>
-                            <li><a href="project.html#Soldiers-in-need-fund-project"
-                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                    data-file="project.html" data-target="Soldiers-in-need-fund-project">Soldiers in
-                                    Need</a>
-                            </li>
-                            <li><a href="project.html#Injured-Soldier-Fund"
-                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                    data-file="project.html" data-target="Injured-Soldier-Fund">Injured Soldier
-                                    Fund</a></li>
-                            <li><a href="project.html#Families-Support"
-                                    class="na-link block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                    data-file="project.html" data-target="Families-Support">Families Support</a>
-                            </li>
+                        <!-- Dropdown menu - Will be populated dynamically -->
+                        <ul
+                            id="desktop-projects-dropdown"
+                            class="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48 max-h-78 overflow-y-auto">
+                            <!-- Projects will be loaded here dynamically -->
                         </ul>
                     </li>
 
@@ -184,7 +176,7 @@
                 <!-- Emergency Response -->
                 <li><a href="#" class="hover:text-israel-blue">Emergency Response</a></li>
 
-                <!-- Projects Dropdown -->
+                <!-- Mobile Projects Dropdown -->
                 <li>
                     <button data-dropdown="projects-dropdown"
                         class="flex justify-between items-center w-full hover:text-israel-blue">
@@ -192,16 +184,7 @@
                         <span>▼</span>
                     </button>
                     <ul id="projects-dropdown" class="hidden pl-4 mt-2 space-y-2">
-                        <li><a href="project.html#warm-corner-project" class="na-link block hover:text-israel-blue"
-                                data-file="project.html" data-target="warm-corner-project">Warm Corners</a></li>
-                        <li><a href="project.html#Soldiers-in-need-fund-project"
-                                class="na-link block hover:text-israel-blue" data-file="project.html"
-                                data-target="Soldiers-in-need-fund-project">Soldiers in Need</a></li>
-                        <li><a href="project.html#Injured-Soldier-Fund" class="na-link block hover:text-israel-blue"
-                                data-file="project.html" data-target="Injured-Soldier-Fund">Injured Soldier Fund</a>
-                        </li>
-                        <li><a href="project.html#Families-Support" class="na-link block hover:text-israel-blue"
-                                data-file="project.html" data-target="Families-Support">Families Support</a></li>
+                        <!-- Projects will be loaded here dynamically -->
                     </ul>
                 </li>
 

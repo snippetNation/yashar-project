@@ -60,4 +60,17 @@
 
 
 
-/* Index.html styles */
+/* donate.html styles */
+
+/* Add this to your CSS */
+.card-number-container {
+  position: relative;
+}
+
+.card-type-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

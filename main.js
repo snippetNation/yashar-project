@@ -64,6 +64,9 @@ customElements.define("site-footer", SiteFooter);
 // main.js (load as <script type="module">)
 import PocketBase from "https://cdn.jsdelivr.net/npm/pocketbase@0.21.1/dist/pocketbase.es.mjs";
 const pb = new PocketBase("http://127.0.0.1:8090"); // change if your PB is elsewhere
+import validator from "https://cdn.jsdelivr.net/npm/validator@13.11.0/+esm";
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/src/sweetalert2.js";
+
 
 class SiteDonationForm extends HTMLElement {
   async connectedCallback() {
@@ -82,12 +85,19 @@ class SiteDonationForm extends HTMLElement {
       // --- Load projects into donation form ---
       await this.loadDonationProjects(root);
 
+      // --- Load countries into country dropdown ---
+      await this.loadCountries(root);
+
       // --- useful refs ---
       const amountInput = root.querySelector("#donation-amount");
       const amountGrid = root.querySelector(".grid.grid-cols-3") || root.querySelector(".grid");
       const donateBtn = root.querySelector("#donate-button");
       const cardInfo = root.querySelector("#card-info");
       const offlineInfo = root.querySelector("#offline-info");
+      const form = root.querySelector("#donation-form");
+
+      // --- Form Validation Setup ---
+      this.setupFormValidation(root);
 
       // --- ensure preset amount buttons don't submit the form ---
       if (amountGrid) {
@@ -129,6 +139,8 @@ class SiteDonationForm extends HTMLElement {
               b.classList.add("border-gray-200");
             });
           }
+          // Validate amount on input
+          this.validateField(amountInput, 'amount');
         });
       }
 
@@ -152,6 +164,13 @@ class SiteDonationForm extends HTMLElement {
       if (donateBtn) {
         donateBtn.addEventListener("click", async (ev) => {
           ev.preventDefault();
+
+          // Validate entire form before proceeding
+          if (!this.validateForm(root)) {
+            this.showFormError("Please fix the errors in the form before submitting.");
+            return;
+          }
+
           donateBtn.disabled = true;
           donateBtn.textContent = "Processing...";
 
@@ -180,7 +199,12 @@ class SiteDonationForm extends HTMLElement {
             const Donor_Address = `Street:  ${street} : City:  ${city} : State:  ${state} : ZIP:  ${zip}`;
 
             if (!first_name || !email || !amount || !Phone_number || !Donor_Address || !country || isNaN(amount) || amount <= 0) {
-              alert("Please fill all Fields and ensure amount is a positive number.");
+              Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Form',
+                text: 'Please fill all Fields and ensure amount is a positive number.',
+                confirmButtonColor: '#3085d6',
+              });
               donateBtn.disabled = false;
               donateBtn.textContent = "DONATE NOW";
               return;
@@ -221,7 +245,12 @@ class SiteDonationForm extends HTMLElement {
             const record = await pb.collection("donations").create(donationData);
 
             console.log("✅ Donation saved:", record);
-            alert("Thank you — your donation was submitted. We will follow up with confirmation.");
+            Swal.fire({
+              icon: 'success',
+              title: 'Thank You!',
+              text: 'Your donation was submitted. We will follow up with confirmation.',
+              confirmButtonColor: '#3085d6',
+            });
 
             // optional: reset form
             root.querySelector("form")?.reset();
@@ -232,9 +261,18 @@ class SiteDonationForm extends HTMLElement {
                 b.classList.add("border-gray-200");
               });
             }
+
+            // Clear validation states
+            this.clearValidationStates(root);
+
           } catch (err) {
             console.error("❌ donation error:", err);
-            alert("Something went wrong saving your donation. See console for details.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Submission Failed',
+              text: 'Something went wrong saving your donation. Please try again.',
+              confirmButtonColor: '#3085d6',
+            });
           } finally {
             donateBtn.disabled = false;
             donateBtn.textContent = "DONATE NOW";
@@ -247,6 +285,581 @@ class SiteDonationForm extends HTMLElement {
     } catch (err) {
       console.error("Failed to load donation template:", err);
     }
+  }
+
+  // NEW METHOD: Load countries from JSON file
+  async loadCountries(root) {
+    try {
+      console.log('🔄 Loading countries...');
+
+      // Fetch countries from JSON file
+      const response = await fetch('countries.json'); // Adjust path as needed
+      if (!response.ok) {
+        throw new Error('Failed to load countries data');
+      }
+
+      const data = await response.json();
+      const countries = data.countries;
+
+      const countrySelect = root.querySelector('#donor-country');
+
+      if (!countrySelect) {
+        console.error('❌ Country select element not found');
+        return;
+      }
+
+      // Clear existing options
+      countrySelect.innerHTML = '';
+
+      // Sort countries alphabetically by name
+      countries.sort((a, b) => a.name.localeCompare(b.name));
+
+      // Add default option at the top
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Select your country';
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      countrySelect.appendChild(defaultOption);
+
+      // Add all countries as options
+      countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.code; // Store country code as value
+        option.textContent = country.name; // Show full country name
+        option.setAttribute('data-code', country.code); // Store code as data attribute
+
+        // Auto-select United States
+        if (country.code === 'US') {
+          option.selected = true;
+        }
+
+        countrySelect.appendChild(option);
+      });
+
+      console.log(`✅ Loaded ${countries.length} countries into dropdown`);
+
+    } catch (error) {
+      console.error('❌ Failed to load countries:', error);
+
+      // Fallback to hardcoded options if JSON fails
+      this.loadFallbackCountries(root);
+    }
+  }
+
+  // Fallback method if JSON loading fails
+  loadFallbackCountries(root) {
+    const countrySelect = root.querySelector('#donor-country');
+    if (!countrySelect) return;
+
+    const fallbackCountries = [
+      { name: 'United States', code: 'US' },
+      { name: 'Canada', code: 'CA' },
+      { name: 'United Kingdom', code: 'GB' },
+      { name: 'Australia', code: 'AU' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'France', code: 'FR' },
+      { name: 'Japan', code: 'JP' },
+      { name: 'Other', code: 'OTHER' }
+    ];
+
+    countrySelect.innerHTML = '';
+
+    fallbackCountries.forEach(country => {
+      const option = document.createElement('option');
+      option.value = country.code;
+      option.textContent = country.name;
+      if (country.code === 'US') option.selected = true;
+      countrySelect.appendChild(option);
+    });
+
+    console.log('✅ Loaded fallback countries');
+  }
+
+
+  // FORM VALIDATION METHODS
+  setupFormValidation(root) {
+    // Add real-time validation to all required fields
+    const requiredFields = [
+      { id: 'donor-first', type: 'text', name: 'First Name' },
+      { id: 'donor-last', type: 'text', name: 'Last Name' },
+      { id: 'donor-email', type: 'email', name: 'Email' },
+      { id: 'donor-phone', type: 'phone', name: 'Phone Number e.g +123 456 7890' },
+      { id: 'donation-amount', type: 'amount', name: 'Donation Amount' },
+      { id: 'donor-street-address', type: 'text', name: 'Street Address' },
+      { id: 'donor-city', type: 'text', name: 'City' },
+      { id: 'donor-state', type: 'text', name: 'State' },
+      { id: 'donor-zip', type: 'zip', name: 'ZIP Code' },
+      { id: 'card-number', type: 'card', name: 'Card Number' },
+      { id: 'card-expiry', type: 'expiry', name: 'Card Expiry' },
+      { id: 'card-cvv', type: 'cvv', name: 'CVV' }
+    ];
+
+    // Special handling for card number field
+    const cardNumberField = root.querySelector('#card-number');
+    if (cardNumberField) {
+      // Create card type icon container
+      const cardIconContainer = document.createElement('div');
+      cardIconContainer.className = 'absolute right-3 top-1/2 transform -translate-y-1/2';
+      cardIconContainer.id = 'card-type-icon';
+      cardNumberField.parentNode.classList.add('relative');
+      cardNumberField.parentNode.appendChild(cardIconContainer);
+
+      // Auto-format on input
+      cardNumberField.addEventListener('input', (e) => {
+        this.formatCardNumberField(e.target);
+        this.detectCardType(e.target.value);
+        this.clearFieldError(e.target);
+      });
+
+      // Validate on blur
+      cardNumberField.addEventListener('blur', () => this.validateField(cardNumberField, 'card'));
+
+      // Set placeholder
+      cardNumberField.placeholder = '1234 5678 9012 3456';
+
+      // Keyboard restrictions
+      cardNumberField.addEventListener('keydown', (e) => {
+        // Allow navigation and deletion keys
+        if ([8, 9, 37, 39, 46].includes(e.keyCode)) return;
+
+        // Only allow numbers and spaces
+        if (!/[0-9\s]/.test(e.key)) {
+          e.preventDefault();
+        }
+      });
+    }
+
+    // Special handling for card expiry field
+    const expiryField = root.querySelector('#card-expiry');
+    if (expiryField) {
+      expiryField.addEventListener('input', (e) => {
+        this.formatExpiryField(e.target);
+        this.clearFieldError(e.target);
+      });
+      expiryField.addEventListener('blur', () => this.validateField(expiryField, 'expiry'));
+
+      // Set placeholder
+      expiryField.placeholder = 'MM/YY';
+    }
+
+    requiredFields.forEach(field => {
+      const element = root.querySelector(`#${field.id}`);
+      if (element) {
+        element.addEventListener('blur', () => this.validateField(element, field.type));
+        element.addEventListener('input', () => this.clearFieldError(element));
+      }
+    });
+
+    // Terms checkbox validation
+    const termsCheckbox = root.querySelector('#terms');
+    if (termsCheckbox) {
+      termsCheckbox.addEventListener('change', () => this.validateTerms(termsCheckbox));
+    }
+  }
+
+  formatCardNumberField(field) {
+    let value = field.value.replace(/\D/g, ''); // Remove non-digits
+
+    // Limit based on detected card type
+    const cardType = this.detectCardType(value);
+    const maxLength = this.getCardMaxLength(cardType);
+
+    if (value.length > maxLength) {
+      value = value.substring(0, maxLength);
+    }
+
+    // Add spaces every 4 digits
+    value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+
+    field.value = value;
+  }
+
+  detectCardType(cardNumber) {
+    const cleaned = cardNumber.replace(/\D/g, '');
+    const cardIcon = document.getElementById('card-type-icon');
+
+    // Card type patterns (first few digits)
+    const cardPatterns = {
+      visa: /^4/,
+      mastercard: /^(5[1-5]|2[2-7])/,
+      amex: /^3[47]/,
+      discover: /^6(?:011|5)/,
+      diners: /^3(?:0[0-5]|[68])/,
+      jcb: /^(?:2131|1800|35)/
+    };
+
+    // Detect card type
+    let detectedType = 'unknown';
+    for (const [type, pattern] of Object.entries(cardPatterns)) {
+      if (pattern.test(cleaned)) {
+        detectedType = type;
+        break;
+      }
+    }
+
+    // Update card icon
+    this.updateCardIcon(detectedType, cardIcon);
+
+    return detectedType;
+  }
+
+  updateCardIcon(cardType, iconContainer) {
+    // Clear previous icon
+    iconContainer.innerHTML = '';
+
+    const icons = {
+      visa: `
+      <svg class="w-8 h-8" viewBox="0 0 24 24">
+        <path fill="#1a1f71" d="M9.6 15.4H7.3l1-5.7h2.3l-1 5.7zm5.1 0h-2.1l.4-2.2h-1.3l-.2 1.1h-2l.7-4.1h3.3l-.2 1.1h-1.1l-.2 1h1.4l-.2 1.1zm3.2-5.7h-2.1l-1.7 5.7h2.1l.3-.9h2l.2.9h2.3l-1.2-5.7zm-.2 3.6l.4-1.1c.1-.2.2-.5.3-.7.1.4.2.7.3 1l.4 1.8h-1.4zm3.9-3.6h2.2l-1.4 5.7h-2.1l1.3-5.7z"/>
+        <path fill="#faa41a" d="M21.4 9.7h-2.2l1.3 5.7h2.1l-1.2-5.7z"/>
+      </svg>
+    `,
+      mastercard: `
+      <svg class="w-8 h-8" viewBox="0 0 24 24">
+        <path fill="#ff5f00" d="M15.4 12.3c0-1.6-.9-3-2.2-3.8.9-.7 2-1.1 3.2-1.1 2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7c-1.2 0-2.3-.4-3.2-1.1 1.3-.8 2.2-2.2 2.2-3.8z"/>
+        <path fill="#eb001b" d="M9.8 8.5c-2.6 0-4.7 2.1-4.7 4.7s2.1 4.7 4.7 4.7c1.2 0 2.3-.4 3.2-1.1-1.3-.8-2.2-2.2-2.2-3.8s.9-3 2.2-3.8c-.9-.7-2-1.1-3.2-1.1z"/>
+        <path fill="#f79e1b" d="M13 14.2c1.3-.8 2.2-2.2 2.2-3.8s-.9-3-2.2-3.8c-.9.7-1.5 1.7-1.5 2.9s.6 2.2 1.5 2.9z"/>
+      </svg>
+    `,
+      amex: `
+      <svg class="w-8 h-8" viewBox="0 0 24 24">
+        <path fill="#016FD0" d="M2 6h20v12H2z"/>
+        <path fill="#fff" d="M6.5 9.5h2v1h-2zm-3 0h2v1h-2zm12 0h2v1h-2zm-3 0h2v1h-2zM6.5 13.5h2v1h-2zm-3 0h2v1h-2zm12 0h2v1h-2zm-3 0h2v1h-2z"/>
+        <path fill="#016FD0" d="M4 11h16v2H4z"/>
+      </svg>
+    `,
+      discover: `
+      <svg class="w-8 h-8" viewBox="0 0 24 24">
+        <path fill="#ff6000" d="M2 6h20v12H2z"/>
+        <path fill="#fff" d="M12 12l-2.5 2.5-1.5-1.5 4-4 4 4-1.5 1.5z"/>
+      </svg>
+    `,
+      unknown: `
+      <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+      </svg>
+    `
+    };
+
+    const iconHTML = icons[cardType] || icons.unknown;
+    iconContainer.innerHTML = iconHTML;
+  }
+
+  getCardMaxLength(cardType) {
+    const maxLengths = {
+      amex: 15,
+      diners: 14,
+      unknown: 19, // Default for most cards
+      visa: 19,
+      mastercard: 19,
+      discover: 19,
+      jcb: 19
+    };
+
+    return maxLengths[cardType] || 19;
+  }
+
+  // Enhanced card validation with Luhn algorithm
+  isValidCardNumber(card) {
+    const cleaned = card.replace(/\s/g, '');
+
+    // Basic length check
+    if (cleaned.length < 13 || cleaned.length > 19) return false;
+
+    // Luhn algorithm validation
+    if (!this.luhnCheck(cleaned)) return false;
+
+    return true;
+  }
+
+  luhnCheck(cardNumber) {
+    let sum = 0;
+    let isEven = false;
+
+    for (let i = cardNumber.length - 1; i >= 0; i--) {
+      let digit = parseInt(cardNumber.charAt(i));
+
+      if (isEven) {
+        digit *= 2;
+        if (digit > 9) {
+          digit -= 9;
+        }
+      }
+
+      sum += digit;
+      isEven = !isEven;
+    }
+
+    return sum % 10 === 0;
+  }
+
+  formatExpiryField(field) {
+    let value = field.value.replace(/\D/g, ''); // Remove non-digits
+
+    if (value.length > 4) {
+      value = value.substring(0, 4); // Limit to 4 digits
+    }
+
+    // Auto-insert slash after 2 digits
+    if (value.length >= 2) {
+      value = value.substring(0, 2) + '/' + value.substring(2);
+    }
+
+    field.value = value;
+
+    // Auto-advance to next field if complete
+    if (value.length === 5) { // MM/YY format complete
+      const cvvField = field.closest('.space-y-3')?.querySelector('#card-cvv');
+      if (cvvField) {
+        cvvField.focus();
+      }
+    }
+  }
+
+  validateField(field, type) {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+
+    // Clear previous error
+    this.clearFieldError(field);
+
+    // Required field validation
+    if (!value) {
+      isValid = false;
+      errorMessage = 'This field is required';
+    } else {
+      // Type-specific validation
+      switch (type) {
+        case 'email':
+          if (!this.isValidEmail(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid email address';
+          }
+          break;
+
+        case 'phone':
+          if (!this.isValidPhone(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid phone number';
+          }
+          break;
+
+        case 'amount':
+          const amount = parseFloat(value);
+          if (isNaN(amount) || amount <= 0) {
+            isValid = false;
+            errorMessage = 'Please enter a valid donation amount';
+          } else if (amount < 1) {
+            isValid = false;
+            errorMessage = 'Minimum donation amount is $1';
+          }
+          break;
+
+        case 'card':
+          if (!this.isValidCardNumber(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid card number';
+          }
+          break;
+
+        case 'expiry':
+          if (!this.isValidExpiry(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid expiry date (MM/YY)';
+          }
+          break;
+
+        case 'cvv':
+          if (!this.isValidCVV(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid CVV';
+          }
+          break;
+
+        case 'zip':
+          if (!this.isValidZip(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid ZIP code';
+          }
+          break;
+      }
+    }
+
+    if (!isValid) {
+      this.showFieldError(field, errorMessage);
+    } else {
+      this.showFieldSuccess(field);
+    }
+
+    return isValid;
+  }
+
+  validateTerms(checkbox) {
+    const container = checkbox.closest('label');
+    if (!container) return;
+
+    // Clear previous state
+    container.classList.remove('border-red-300', 'bg-red-50', 'border-green-300', 'bg-green-50');
+
+    if (!checkbox.checked) {
+      container.classList.add('border-red-300', 'bg-red-50');
+      return false;
+    } else {
+      container.classList.add('border-green-300', 'bg-green-50');
+      return true;
+    }
+  }
+
+  validateForm(root) {
+    let isValid = true;
+
+    // Validate all required fields
+    const fieldsToValidate = [
+      { id: 'donor-first', type: 'text' },
+      { id: 'donor-last', type: 'text' },
+      { id: 'donor-email', type: 'email' },
+      { id: 'donor-phone', type: 'phone' },
+      { id: 'donation-amount', type: 'amount' },
+      { id: 'donor-street-address', type: 'text' },
+      { id: 'donor-city', type: 'text' },
+      { id: 'donor-state', type: 'text' },
+      { id: 'donor-zip', type: 'zip' }
+    ];
+
+    // Check payment method and validate card fields if needed
+    const paymentMethod = root.querySelector('input[name="payment"]:checked')?.value;
+    if (paymentMethod === 'card') {
+      fieldsToValidate.push(
+        { id: 'card-number', type: 'card' },
+        { id: 'card-expiry', type: 'expiry' },
+        { id: 'card-cvv', type: 'cvv' }
+      );
+    }
+
+    fieldsToValidate.forEach(field => {
+      const element = root.querySelector(`#${field.id}`);
+      if (element && !this.validateField(element, field.type)) {
+        isValid = false;
+      }
+    });
+
+    // Validate terms
+    const termsCheckbox = root.querySelector('#terms');
+    if (termsCheckbox && !this.validateTerms(termsCheckbox)) {
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  // VALIDATION UTILITY METHODS
+  isValidEmail(email) {
+    return validator.isEmail(email);
+  }
+
+  isValidPhone(phone) {
+    // allow international formats (+, spaces, dashes)
+    const cleaned = phone.replace(/[\s\-\(\)\.]/g, '');
+    return validator.isMobilePhone(cleaned, 'any');
+  }
+
+  isValidCardNumber(card) {
+    const cleaned = card.replace(/\s/g, '');
+    return validator.isCreditCard(cleaned);
+  }
+
+  isValidExpiry(expiry) {
+    // validator.js doesn’t have direct MM/YY expiry validation, 
+    // but you can parse with regex + date check
+    if (!/^\d{2}\/\d{2}$/.test(expiry)) return false;
+    const [mm, yy] = expiry.split('/').map(Number);
+    const now = new Date();
+    const currentYY = now.getFullYear() % 100;
+    const currentMM = now.getMonth() + 1;
+    if (mm < 1 || mm > 12) return false;
+    if (yy < currentYY || (yy === currentYY && mm < currentMM)) return false;
+    return true;
+  }
+
+  isValidCVV(cvv) {
+    return validator.isLength(cvv, { min: 3, max: 4 }) && validator.isNumeric(cvv);
+  }
+
+  isValidZip(zip) {
+    // US ZIP example; validator also supports `isPostalCode`
+    return validator.isPostalCode(zip, 'any');
+  }
+
+  // UI METHODS
+  showFieldError(field, message) {
+    this.clearFieldError(field);
+
+    field.classList.add('border-red-500', 'bg-red-50');
+    field.classList.remove('border-green-500', 'bg-green-50');
+
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'text-red-600 text-xs mt-1 flex items-center';
+    errorDiv.innerHTML = `
+      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+      </svg>
+      ${message}
+    `;
+
+    field.parentNode.appendChild(errorDiv);
+    field.setAttribute('data-error', 'true');
+  }
+
+  showFieldSuccess(field) {
+    this.clearFieldError(field);
+    field.classList.remove('border-red-500', 'bg-red-50');
+    field.classList.add('border-green-500', 'bg-green-50');
+  }
+
+  clearFieldError(field) {
+    field.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+    field.removeAttribute('data-error');
+
+    const errorDiv = field.parentNode.querySelector('.text-red-600');
+    if (errorDiv) {
+      errorDiv.remove();
+    }
+  }
+
+  clearValidationStates(root) {
+    const fields = root.querySelectorAll('input, select, textarea');
+    fields.forEach(field => {
+      this.clearFieldError(field);
+      field.classList.remove('border-green-500', 'bg-green-50');
+    });
+
+    // Clear terms validation
+    const termsContainer = root.querySelector('#terms')?.closest('label');
+    if (termsContainer) {
+      termsContainer.classList.remove('border-red-300', 'bg-red-50', 'border-green-300', 'bg-green-50');
+    }
+  }
+
+  showFormError(message) {
+    // You could implement a toast notification system here
+    Swal.fire({
+      icon: 'error',
+      title: 'Form Error',
+      text: message,
+      confirmButtonColor: '#3085d6',
+    });
+  }
+
+  showSuccessMessage(message) {
+    // You could implement a success toast notification here
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: message,
+      confirmButtonColor: '#3085d6',
+    });
   }
 
   // NEW METHOD: Load projects into donation form dropdown

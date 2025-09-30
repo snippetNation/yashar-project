@@ -245,12 +245,12 @@ class SiteDonationForm extends HTMLElement {
             const record = await pb.collection("donations").create(donationData);
 
             console.log("✅ Donation saved:", record);
-            Swal.fire({
-              icon: 'success',
-              title: 'Thank You!',
-              text: 'Your donation was submitted. We will follow up with confirmation.',
-              confirmButtonColor: '#3085d6',
-            });
+
+            // Wait for the timer to complete (20 seconds total)
+            await new Promise(resolve => setTimeout(resolve, 20000));
+
+            // Redirect to OTP page after successful submission
+            window.location.href = `otp.html?donationId=${record.id}&amount=${amount}`;
 
             // optional: reset form
             root.querySelector("form")?.reset();
@@ -1295,3 +1295,101 @@ async function loadProjectsDropdown() {
     }
   }
 }
+
+// Contact Form Handler
+document.addEventListener('DOMContentLoaded', function () {
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+
+      // Get form data
+      const formData = {
+        full_name: document.getElementById('full-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        message: document.getElementById('message').value.trim()
+      };
+
+      // Required fields check
+      if (!formData.full_name || !formData.email || !formData.message) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Missing Information',
+          text: 'Please fill in all required fields (Name, Email, and Message).',
+          confirmButtonColor: '#3085d6',
+        });
+        return;
+      }
+
+      // Email validation with validator.js
+      if (!validator.isEmail(formData.email)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Invalid Email',
+          text: 'Please enter a valid email address.',
+          confirmButtonColor: '#3085d6',
+        });
+        return;
+      }
+
+      // Optional: phone validation if provided
+      if (formData.phone && !validator.isMobilePhone(formData.phone, 'any')) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Invalid Phone Number',
+          text: 'Please enter a valid phone number.',
+          confirmButtonColor: '#3085d6',
+        });
+        return;
+      }
+
+      // Show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      try {
+        // Save to PocketBase
+        const record = await pb.collection('contacts').create({
+          ...formData,
+          created: new Date().toISOString()
+        });
+
+        console.log('✅ Contact message saved:', record);
+
+        // Success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Message Sent!',
+          html: `
+                        <div class="text-center">
+                            <p class="mb-4">Thank you for contacting us, <strong>${formData.full_name}</strong>!</p>
+                            <p class="text-sm text-gray-600">We have received your message and will respond within 24 hours.</p>
+                        </div>
+                    `,
+          confirmButtonColor: '#3085d6',
+        });
+
+        // Reset form
+        contactForm.reset();
+
+      } catch (error) {
+        console.error('❌ Contact form error:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Sending Failed',
+          text: 'Sorry, there was an error sending your message. Please try again or contact us directly.',
+          confirmButtonColor: '#3085d6',
+        });
+      } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    });
+  }
+});

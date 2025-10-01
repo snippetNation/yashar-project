@@ -1,9 +1,10 @@
 {
   "name": "yashar-worker",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Telegram notifications for YasharProject donations",
+  "main": "worker.js",
   "scripts": {
+    "start": "node worker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,9 @@
     "nodemailer": "^7.0.6",
     "pocketbase": "^0.26.2",
     "ws": "^8.18.3"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "type": "module"
 }

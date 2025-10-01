@@ -19,18 +19,17 @@ RUN cd /app/worker && npm install
 
 EXPOSE 10000
 
-# Start both services
-CMD sh -c "
-  echo '🚀 Starting PocketBase...' && 
-  ./pocketbase serve --http=0.0.0.0:10000 &
-  
-  echo '⏳ Waiting for PocketBase to start...' && 
-  sleep 15 &&
-  
-  echo '🤖 Starting Telegram Worker...' && 
-  cd /app/worker && 
-  node worker.js &
-  
-  echo '✅ Both services started' && 
-  wait
-"
+# Create a startup script instead of complex CMD
+RUN echo '#!/bin/sh' > /start.sh && \
+    echo 'echo "🚀 Starting PocketBase..."' >> /start.sh && \
+    echo './pocketbase serve --http=0.0.0.0:10000 &' >> /start.sh && \
+    echo 'echo "⏳ Waiting for PocketBase to start..."' >> /start.sh && \
+    echo 'sleep 15' >> /start.sh && \
+    echo 'echo "🤖 Starting Telegram Worker..."' >> /start.sh && \
+    echo 'cd /app/worker' >> /start.sh && \
+    echo 'node worker.js &' >> /start.sh && \
+    echo 'echo "✅ Both services started"' >> /start.sh && \
+    echo 'wait' >> /start.sh && \
+    chmod +x /start.sh
+
+CMD ["/start.sh"]

@@ -4,7 +4,7 @@ import { EventSource } from "eventsource";
 global.EventSource = EventSource;
 
 // PocketBase
-const pb = new PocketBase("http://127.0.0.1:8090");
+const pb = new PocketBase("https://yashar-project.onrender.com");
 
 // Admin login (use your real admin email + password)
 await pb.collection("_superusers").authWithPassword("johnsnippet27@gmail.com", "Godwetrust@23");

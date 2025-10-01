@@ -65,7 +65,7 @@ customElements.define("site-footer", SiteFooter);
 import PocketBase from "https://cdn.jsdelivr.net/npm/pocketbase@0.21.1/dist/pocketbase.es.mjs";
 const pbUrl = window.location.hostname.includes('localhost')
   ? "http://127.0.0.1:8090"
-  : "https://your-railway-backend.up.railway.app";
+  : "https://yashar-project.onrender.com";
 const pb = new PocketBase(pbUrl); // change if your PB is elsewhere
 import validator from "https://cdn.jsdelivr.net/npm/validator@13.11.0/+esm";
 import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/src/sweetalert2.js";

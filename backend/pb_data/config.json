@@ -3,7 +3,7 @@
     "cors": {
       "enabled": true,
       "origins": [
-        "https://68dd0465d6080e6164a8f583--silly-basbousa-dd3f3d.netlify.app/",
+        "https://68dd0465d6080e6164a8f583--silly-basbousa-dd3f3d.netlify.app",
         "http://localhost:3000",
         "https://localhost:3000"
       ]

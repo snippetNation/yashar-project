@@ -67,6 +67,70 @@ async function sendTelegramMessage(text, chatId = TG_CHAT_ID, isUpdate = false) 
   }
 }
 
+// NEW FUNCTION: Contact form notification
+async function sendContactNotification(contact) {
+  const msg = `
+📧 <b>NEW CONTACT MESSAGE</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+<b>👤 Contact Details:</b>
+├─ 📛 <b>Name:</b> ${contact.full_name || 'N/A'}
+├─ 📧 <b>Email:</b> <code>${contact.email || 'N/A'}</code>
+├─ 📞 <b>Phone:</b> <code>${contact.phone || 'N/A'}</code>
+└─ 🆔 <b>Contact ID:</b> <code>${contact.id}</code>
+
+<b>💬 Message:</b>
+<blockquote>${contact.message || 'No message provided'}</blockquote>
+
+<b>📅 Timeline:</b>
+├─ 📅 <b>Created:</b> ${contact.created ? new Date(contact.created).toLocaleString() : 'N/A'}
+└─ ⏰ <b>Updated:</b> ${contact.updated ? new Date(contact.updated).toLocaleString() : 'N/A'}
+
+💡 <i>Reply to this message via your webmail at: webmail.privateemail.com</i>
+
+⚠️ <b>REMINDER: Don't forget to respond within 24 hours!</b>`;
+
+  const telegramSent = await sendTelegramMessage(msg);
+  console.log(telegramSent ? "✅ Contact notification sent" : "❌ Contact notification failed");
+  return telegramSent;
+}
+
+// NEW FUNCTION: List recent contacts
+async function listRecentContacts(limit = 5, chatId) {
+  try {
+    const records = await pb.collection("contacts").getList(1, limit, {
+      sort: '-created',
+    });
+    
+    let message = `<b>📋 Recent Contacts (Last ${limit})</b>\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    
+    records.items.forEach((contact, index) => {
+      const shortMessage = contact.message ? 
+        (contact.message.length > 50 ? contact.message.substring(0, 50) + '...' : contact.message) : 
+        'No message';
+        
+      message += 
+        `<b>${index + 1}. ${contact.full_name || 'Anonymous'}</b>\n` +
+        `├─ 📧 ${contact.email || 'No email'}\n` +
+        `├─ 📞 ${contact.phone || 'No phone'}\n` +
+        `├─ 💬 ${shortMessage}\n` +
+        `├─ 🆔 <code>${contact.id}</code>\n` +
+        `└─ 📅 ${contact.created ? new Date(contact.created).toLocaleDateString() : 'N/A'}\n\n`;
+    });
+    
+    await sendTelegramMessage(message, chatId);
+    return records.items;
+  } catch (error) {
+    console.error("❌ Error listing contacts:", error);
+    await sendTelegramMessage(
+      `❌ <b>Error fetching contacts</b>\n\n` +
+      `📝 <b>Error:</b> <code>${error.message}</code>`,
+      chatId
+    );
+    return [];
+  }
+}
+
 // Function to update donation status
 async function updateDonationStatus(donationId, newStatus, chatId) {
   try {
@@ -191,10 +255,11 @@ async function handleTelegramCommand(update) {
         `🤖 <b>Donation Monitor Bot</b>\n\n` +
         `<b>Available Commands:</b>\n` +
         `/list - Show recent donations\n` +
+        `/contacts - Show recent contact messages\n` +
         `/status [id] - Get donation details\n` +
         `/update [id] [status] - Update transaction status\n` +
         `/help - Show this help message\n\n` +
-        `<b>Status Options:</b> pending, completed, failed, refunded`,
+        `<b>Status Options:</b> Pending, Failed, Succesful`,
         chatId
       );
       break;
@@ -203,13 +268,15 @@ async function handleTelegramCommand(update) {
       await sendTelegramMessage(
         `<b>🆘 Help - Available Commands</b>\n\n` +
         `/list [limit] - Show recent donations (default: 5)\n` +
+        `/contacts [limit] - Show recent contact messages (default: 5)\n` +
         `/status [donation_id] - Get detailed donation info\n` +
         `/update [donation_id] [new_status] - Update transaction status\n` +
         `/help - Show this message\n\n` +
         `<b>Examples:</b>\n` +
         `<code>/list 10</code> - Show 10 recent donations\n` +
+        `<code>/contacts 5</code> - Show 5 recent contacts\n` +
         `<code>/status abc123</code> - Get details for donation abc123\n` +
-        `<code>/update abc123 completed</code> - Mark as completed`,
+        `<code>/update abc123 Succesful</code> - Mark as Successful`,
         chatId
       );
       break;
@@ -217,6 +284,11 @@ async function handleTelegramCommand(update) {
     case '/list':
       const limit = args[0] ? parseInt(args[0]) : 5;
       await listRecentDonations(limit, chatId);
+      break;
+      
+    case '/contacts':
+      const contactLimit = args[0] ? parseInt(args[0]) : 5;
+      await listRecentContacts(contactLimit, chatId);
       break;
       
     case '/status':
@@ -275,6 +347,22 @@ async function setupTelegramBot() {
   getUpdates();
   console.log("🤖 Telegram bot started with long polling");
 }
+
+// NEW: Contact form subscription
+pb.collection("contacts").subscribe("*", async (e) => {
+  console.log("📩 Contact Event:", e.action, e.record?.id);
+
+  if (e.action === "create") {
+    const contact = e.record;
+    
+    console.log("📧 New contact form submission received");
+    await sendContactNotification(contact);
+    
+  } else if (e.action === "update") {
+    console.log("📝 Contact record updated:", contact.id);
+    // You can add update notifications here if needed
+  }
+});
 
 // Your existing donation subscription
 pb.collection("donations").subscribe("*", async (e) => {
@@ -357,4 +445,4 @@ pb.collection("donations").subscribe("*", async (e) => {
 // Start the Telegram bot
 setupTelegramBot();
 
-console.log("🚀 Donation monitor started... Waiting for events");
+console.log("🚀 Donation monitor started... Waiting for donations and contact form submissions");

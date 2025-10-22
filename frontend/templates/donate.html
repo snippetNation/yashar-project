@@ -1,4 +1,3 @@
-
 <!-- Donation Sidebar -->
 <div class="lg:sticky lg:top-6">
     <form id="donation-form" class="">
@@ -44,8 +43,7 @@
                             <label for="recurring" class="ml-2 text-sm font-medium text-dark-gray">Make this a
                                 recurring donation</label>
                         </div>
-                        <select
-                            id="donation-recurring-interval"
+                        <select id="donation-recurring-interval"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yashar-blue focus:border-transparent">
                             <option>One time payment</option>
                             <option>daily</option>
@@ -60,8 +58,7 @@
                     <div class="mb-6">
                         <label class="block text-sm font-semibold text-dark-gray mb-3">Direct your donation
                             *</label>
-                        <select
-                            id="donation-project"
+                        <select id="donation-project"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yashar-blue focus:border-transparent">
                             <option>Where needed most</option>
                             <option>Emergency Medical Supplies</option>
@@ -95,11 +92,12 @@
                         <div class="space-y-3">
                             <label
                                 class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="payment" value="card" class="text-yashar-blue focus:ring-yashar-blue"
-                                    checked="">
-                                <i class="ml-3 mr-2 text-gray-600" data-fa-i2svg=""><svg class="svg-inline--fa fa-credit-card"
-                                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card"
-                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                                <input type="radio" name="payment" value="card"
+                                    class="text-yashar-blue focus:ring-yashar-blue" checked="">
+                                <i class="ml-3 mr-2 text-gray-600" data-fa-i2svg=""><svg
+                                        class="svg-inline--fa fa-credit-card" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="credit-card" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
                                         <path fill="currentColor"
                                             d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16z">
                                         </path>
@@ -107,25 +105,34 @@
                                 <span class="text-gray-700">Credit/Debit Card</span>
                             </label>
                             <label
-                                class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                                class="flex items-center p-4 border border-gray-300 rounded-lg cursor-not-allowed bg-gray-50 relative">
                                 <input type="radio" name="payment" value="paypal"
-                                    class="text-yashar-blue focus:ring-yashar-blue" disabled>
-                                <i class="ml-3 mr-2 text-blue-600" data-fa-i2svg=""><svg class="svg-inline--fa fa-paypal"
-                                        aria-hidden="true" focusable="false" data-prefix="fab" data-icon="paypal" role="img"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                    class="text-blue-600 focus:ring-blue-500" disabled>
+                                <i class="ml-3 mr-3 text-blue-600 text-xl">
+                                    <svg class="w-6 h-6" aria-hidden="true" focusable="false" data-prefix="fab"
+                                        data-icon="paypal" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 384 512">
                                         <path fill="currentColor"
                                             d="M111.4 295.9c-3.5 19.2-17.4 108.7-21.5 134-.3 1.8-1 2.5-3 2.5H12.3c-7.6 0-13.1-6.6-12.1-13.9L58.8 46.6c1.5-9.6 10.1-16.9 20-16.9 152.3 0 165.1-3.7 204 11.4 60.1 23.3 65.6 79.5 44 140.3-21.5 62.6-72.5 89.5-140.1 90.3-43.4.7-69.5-7-75.3 24.2zM357.1 152c-1.8-1.3-2.5-1.8-3 1.3-2 11.4-5.1 22.5-8.8 33.6-39.9 113.8-150.5 103.9-204.5 103.9-6.1 0-10.1 3.3-10.9 9.4-22.6 140.4-27.1 169.7-27.1 169.7-1 7.1 3.5 12.9 10.6 12.9h63.5c8.6 0 15.7-6.3 17.4-14.9.7-5.4-1.1 6.1 14.4-91.3 4.6-22 14.3-19.7 29.3-19.7 71 0 126.4-28.8 142.9-112.3 6.5-34.8 4.6-71.4-23.8-92.6z">
                                         </path>
-                                    </svg></i>
-                                <span class="text-gray-700">PayPal</span>
+                                    </svg>
+                                </i>
+                                <div class="flex justify-between items-center w-full">
+                                    <span class="text-gray-700 font-medium">PayPal</span>
+                                    <span
+                                        class="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded-full border border-amber-200">
+                                        COMING SOON
+                                    </span>
+                                </div>
                             </label>
                             <label
                                 class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                                 <input type="radio" name="payment" value="offline"
-                                    class="text-yashar-blue focus:ring-yashar-blue" disabled>
-                                <i class="ml-3 mr-2 text-gray-600" data-fa-i2svg=""><svg class="svg-inline--fa fa-money-check"
-                                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="money-check"
-                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                                    class="text-yashar-blue focus:ring-yashar-blue" >
+                                <i class="ml-3 mr-2 text-gray-600" data-fa-i2svg=""><svg
+                                        class="svg-inline--fa fa-money-check" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="money-check" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
                                         <path fill="currentColor"
                                             d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm48 160H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zM96 336c0-8.8 7.2-16 16-16H464c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16zM376 160h80c13.3 0 24 10.7 24 24v48c0 13.3-10.7 24-24 24H376c-13.3 0-24-10.7-24-24V184c0-13.3 10.7-24 24-24z">
                                         </path>
@@ -165,8 +172,7 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <input id="donor-zip" type="text" placeholder="ZIP Code *"
                                     class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yashar-blue focus:border-transparent">
-                                <select
-                                    id="donor-country"
+                                <select id="donor-country"
                                     class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yashar-blue focus:border-transparent">
                                     <option>United States</option>
                                     <option>Canada</option>
@@ -222,10 +228,10 @@
                     <div id="offline-info" class="hidden mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                         <h4 class="font-semibold text-dark-gray mb-3">Mail Your Check To:</h4>
                         <div class="text-sm text-gray-700 space-y-1">
-                            <div>YasharProject</div>
-                            <div>1234 Charity Lane</div>
-                            <div>Suite 100</div>
-                            <div>New York, NY 10001</div>
+                            <div>Friends of Yashar LaChayal</div>
+                            <div>20 Chalmers Road</div>
+                            <div>East Brunswick, N.J. 08816</div>
+                            <div>U.S.: +1 (239) 378-1272</div>
                         </div>
                         <p class="text-xs text-gray-600 mt-3">Please include your contact information with your
                             check for tax receipt purposes.</p>

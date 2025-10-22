@@ -163,6 +163,8 @@ class SiteDonationForm extends HTMLElement {
         });
       });
 
+      
+
       // --- donate button handler ---
       if (donateBtn) {
         donateBtn.addEventListener("click", async (ev) => {

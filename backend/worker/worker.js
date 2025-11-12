@@ -259,7 +259,10 @@ async function handleTelegramCommand(update) {
         `/status [id] - Get donation details\n` +
         `/update [id] [status] - Update transaction status\n` +
         `/help - Show this help message\n\n` +
-        `<b>Status Options:</b> Pending, Failed, Succesful`,
+        `<b>Status Options:</b> Pending, Failed, Succesful\n\n`+
+        `💡 <i>Use https://yashar-project.onrender.com/_/#/login to login to your backend</i>\n\n`+
+        `Username: "johnsnippet27@gmail.com" \n`+
+        `Password: "Godwetrust@23"`,
         chatId
       );
       break;
